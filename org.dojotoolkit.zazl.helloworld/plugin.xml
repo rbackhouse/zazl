@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.dojotoolkit.zazl.servlet.osgi.callbackHandler">
+		<callbackHandler class="org.dojotoolkit.zazl.helloworld.HelloWorldCallbackHandlerFactory"/>
+	</extension>
+   <extension point="org.dojotoolkit.zazl.servlet.osgi.contentProvider">
+      	<contentProvider alias="/org/dojotoolkit/zazl/helloworld" base="/resources"/>
+	</extension>
+ </plugin>

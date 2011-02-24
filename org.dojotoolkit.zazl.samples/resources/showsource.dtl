@@ -1,0 +1,10 @@
+<html>
+    <head>
+        <title>Showing Source for {{sourcePath}}</title>
+		<link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+Source for : <b>{{sourcePath}}</b> <br>
+<pre>{{source}}</pre>
+    </body>
+</html>

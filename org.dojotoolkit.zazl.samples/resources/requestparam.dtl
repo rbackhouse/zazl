@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Request Parameters Sample</title>
+		<link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+    	<div id="summary">
+    		<br/>
+    		<strong>Request Parameter Sample</strong>
+	    	<p>
+	    		This sample demonstrates how the request parameters are accessible via the request variable. The template looks for 
+	    		a request parameter called 'myparam' and if it is provided the value is written to the response. You can look at the 
+	    		source for <a href="showsource?sourcePath=jssrc/dojox/serverdtl/Request.js&namespace=org.dojotoolkit.serverdtl&fromBundle=true">dojox.serverdtl.Request</a>
+	    		to see the other request attributes that are available.
+	    	</p>
+    		<br/>
+    		<strong>Source</strong>
+	    	<p>
+	    	<ul>
+	    	<li><a href="showsource?sourcePath=requestparam.dtl">resources/requestparam.dtl</a> - The template file</li>
+	    	<li><a href="showsource?sourcePath=handlers/RequestParamContext.js">resources/handlers/RequestParamContext.js</a> - The Context</li>
+	    	</ul>
+	    	</p>
+	    </div>
+	    <hr style="color: #f00; background-color: #f00; height: 2px;">
+   		<br/>
+    {% if request.parameters.myparam %}
+    	<b>myparam =</b> {{ request.parameters.myparam }}
+    {% else %}
+    	<b>myparam has not been provided</b>
+    {% endif %}
+    </body>
+</html>

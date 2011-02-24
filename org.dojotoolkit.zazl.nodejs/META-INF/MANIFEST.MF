@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Nodejs Dojo Support
+Bundle-SymbolicName: org.dojotoolkit.zazl.nodejs
+Bundle-Version: 1.0.0.qualifier

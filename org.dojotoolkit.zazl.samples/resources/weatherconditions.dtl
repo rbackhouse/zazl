@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Weather Conditions</title>
+		<link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+    	<div id="summary">
+    		<br/>
+    		<strong>Weather Conditions Sample</strong>
+	    	<p>
+	    		This sample demonstrates using a form to obtain an ICAO code that is then used to make a server-side XHR request to 
+	    		the <a href="http://ws.geonames.org">GeoNames</a> website to collect weather conditions. 
+	    	</p>
+    		<br/>
+    		<strong>Source</strong>
+	    	<p>
+	    	<ul>
+	    	<li><a href="showsource?sourcePath=weatherconditions.dtl">resources/weatherconditions.dtl</a> - The template file</li>
+	    	<li><a href="showsource?sourcePath=handlers/WeatherConditionsContext.js">resources/handlers/WeatherConditionsContext.js</a> - The Context</li>
+	    	</ul>
+	    	</p>
+	    </div>
+	    <hr style="color: #f00; background-color: #f00; height: 2px;">
+   		<br/>
+    	<form action="weatherconditions" method="post">
+    		<b>Enter the <a href="http://en.wikipedia.org/wiki/List_of_airports_by_ICAO_code">ICAO</a> Code:</b>
+			<input type="text" name="icaoCode" />
+			<input type="submit" value="Get Weather Conditions" />
+		</form>
+		{% if weatherObservation %}
+	        <ul>
+		        <li> <b>Station Name :</b> {{ weatherObservation.stationName }}</li>
+		        <li> <b>Weather Condition :</b> {{ weatherObservation.weatherCondition }}</li>
+		        <li> <b>Temperature :</b> {{ weatherObservation.temperature }}</li>
+		        <li> <b>Date/Time :</b> {{ weatherObservation.datetime }}</li>
+		        <li> <b>Humidity :</b> {{ weatherObservation.humidity }}</li>
+		        <li> <b>Country :</b> {{ weatherObservation.countryCode }}</li>
+		        {% if weatherObservation.windDirection %}
+			        <li> <b>Wind Direction :</b> {{ weatherObservation.windDirection }}</li>
+				{% endif %} 
+		        <li> <b>Wind Speed :</b> {{ weatherObservation.windSpeed }}</li>
+		        <li> <b>Clouds :</b> {{ weatherObservation.clouds }}</li>
+		        {% if weatherObservation.seaLevelPressure %}
+			        <li> <b>Sea Level Pressure :</b> {{ weatherObservation.seaLevelPressure }}</li>
+				{% endif %} 
+		        <li> <b>Latitude :</b> {{ weatherObservation.lat }}</li>
+		        <li> <b>Longditude :</b> {{ weatherObservation.lng }}</li>
+		        <li> <b>Elevation :</b> {{ weatherObservation.elevation }}</li>
+		        <li> <b>Dew Point :</b> {{ weatherObservation.dewPoint }}</li>
+		        <li> <b>Observation :</b> {{ weatherObservation.observation }}</li>
+	        </ul>
+		{% endif %} 
+		{% if errorMessage %}
+			{{errorMessage}}
+		{% endif %} 
+    </body>
+</html>

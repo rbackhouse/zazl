@@ -1,0 +1,30 @@
+{% load org.dojotoolkit.zazl.samples.filters.filter %}
+<html>
+    <head>
+        <title>Hello, World using the sample bold filter</title>
+		<link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+    	<div id="summary">
+    		<br/>
+    		<strong>Custom Filter Sample</strong>
+	    	<p>
+	    		This sample demonstrates creating and using a custom filter. The 'load' tag is used at the top of the template 
+	    		to declare the namespace of the filter to be loaded. The filter in this sample is called 'bold' and
+	    		will ensure that the variable is surrounded with a bold HTML tag.
+	    	</p>
+    		<br/>
+    		<strong>Source</strong>
+	    	<p>
+	    	<ul>
+	    	<li><a href="showsource?sourcePath=filter.dtl">resources/filter.dtl</a> - The template file</li>
+	    	<li><a href="showsource?sourcePath=handlers/FilterContext.js">resources/handlers/FilterContext.js</a> - The Context</li>
+	    	<li><a href="showsource?sourcePath=filters/filter.js">filters/filter.js</a> - The JavaScript that provides the custom filter</li>
+	    	</ul>
+	    	</p>
+	    </div>
+	    <hr style="color: #f00; background-color: #f00; height: 2px;">
+   		<br/>
+	    {{ helloWorld|bold }}
+    </body>
+</html>

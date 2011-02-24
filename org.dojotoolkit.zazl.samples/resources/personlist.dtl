@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Person List</title>
+        <style type="text/css">
+            #summary {
+            	border-bottom:1px solid black;
+            	width: 40%;
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body class="tundra">
+		<div id="summary">
+			<br/>
+    		<strong>Summary</strong>
+	    	<p>
+				This page is an example of loading data contained on the server. We acquire the list of people for this page
+				in the PersonListContext handler, contained in examples/handlers/.  This handler loads the data in data/people.json,
+				then sends the data to the personlist.dtl file as a "people" object. The template then iterates through the "people" object
+				to create the list on this page.
+			</p>
+		</div>
+		<br/>
+
+        <ul>
+            {% for person in people %}
+                <li>{{ person.firstName }} {{ person.lastName }} : {{ person.emailAddress }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

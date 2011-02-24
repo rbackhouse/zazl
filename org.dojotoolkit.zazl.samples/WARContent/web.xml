@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<context-param>
+	    <param-name>V8</param-name>
+	    <param-value>true</param-value>
+	</context-param>
+	<context-param>
+	    <param-name>compressJS</param-name>
+	    <param-value>true</param-value>
+	</context-param>
+    <servlet>
+        <description/>
+        <display-name>ZazlServlet</display-name>
+        <servlet-name>ZazlServlet</servlet-name>
+        <servlet-class>org.dojotoolkit.zazl.servlet.ZazlServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description/>
+        <display-name>JSServlet</display-name>
+        <servlet-name>JSServlet</servlet-name>
+        <servlet-class>org.dojotoolkit.optimizer.servlet.JSServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ZazlServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JSServlet</servlet-name>
+        <url-pattern>/_javascript/*</url-pattern>
+    </servlet-mapping>
+</web-app>

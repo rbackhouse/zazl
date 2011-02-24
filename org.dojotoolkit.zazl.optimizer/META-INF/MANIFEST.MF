@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Optimizer
+Bundle-SymbolicName: org.dojotoolkit.zazl.optimizer;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: javax.servlet,
+ javax.servlet.http,
+ org.dojotoolkit.optimizer,
+ org.dojotoolkit.zazl.callback,
+ org.dojotoolkit.zazl.servlet,
+ org.dojotoolkit.zazl.util
+Export-Package: org.dojotoolkit.zazl.optimizer

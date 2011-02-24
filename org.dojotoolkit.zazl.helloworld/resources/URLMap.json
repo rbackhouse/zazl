@@ -1,0 +1,7 @@
+[
+	{
+		"urlPattern": "^/helloworld",
+	 	"callback": "org.dojotoolkit.zazl.helloworld.HelloWorldContext",
+		"callbackHandlerId": "org.dojotoolkit.zazl.helloworld.HelloWorldCallbackHandlerFactory"
+	}
+]

@@ -1,0 +1,23 @@
+.tweets {
+	width: 600px;
+}
+.tweets .from-user {
+	font-weight: bold;
+}
+.twitter-div {
+	border-top: 1px solid #efefef;
+	overflow: hidden;
+	padding-bottom: 8px;
+	padding-top: 10px;
+}
+.twitter-profileImage img {
+	border: 1px solid #ccc;
+	width: 48px;
+	height: 48px;
+	padding: 1px;
+}
+.twitter-messageDiv{
+	float: right;
+	width: 90%;
+	line-height: 1.4;
+}

@@ -1,0 +1,4 @@
+{ 
+	"name" : "zazlserver",
+	"main" : "./lib/zazlserver.js" 
+}

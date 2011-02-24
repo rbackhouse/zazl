@@ -1,0 +1,31 @@
+[
+	{
+		"jarnamePrefix" : "dojo.jar",
+		"path" : "/"	
+	},
+	{
+		"jarnamePrefix" : "org.dojotoolkit.zazl_",
+		"path" : "/jssrc/"	
+	},
+	{
+		"jarnamePrefix" : "org.dojotoolkit.optimizer_",
+		"path" : "/"	
+	},
+	{
+		"jarnamePrefix" : "org.dojotoolkit.zazl.optimizer_",
+		"path" : "/"	
+	},
+	{
+		"jarnamePrefix" : "org.dojotoolkit.compressor.uglifyjs_",
+		"path" : "/"	
+	},
+	{
+		"jarnamePrefix" : "uglifyjs",
+		"path" : "/"	
+	},
+	{
+		"jarnamePrefix" : "jsonjs",
+		"path" : "/"	
+	}
+ 
+]

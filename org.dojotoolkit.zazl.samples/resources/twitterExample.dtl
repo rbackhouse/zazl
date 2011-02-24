@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Tweets</title>
+        <link rel="stylesheet" type="text/css" href="{{contextRoot}}/css/twitter.css"></link>
+        <link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+        <style type="text/css">
+            #summary {
+            	border-bottom:1px solid black;
+            	width: 40%;
+            }
+            .hide {
+            	display: none;
+            }
+        </style>
+        <script type="text/javascript" src="{{contextRoot}}/dojo/dojo.js"></script>
+        
+        <script type="text/javascript">
+        	function refreshTweets(event){
+        		dojo.stopEvent(event);
+        		
+        		dojo.xhrGet({
+        			url: "{{contextRoot}}/twitter/refresh",
+        			load: function(data){
+        				var tweetHtml = dojo.byId("tweets").innerHTML;
+        				dojo.byId("tweets").innerHTML = data + tweetHtml;
+        			},
+        			error: function(data){
+        				console.debug("error");
+        			}
+        		});
+        	}
+        	
+        	function showMore(e){
+        		dojo.stopEvent(e);
+        		
+        		dojo.toggleClass("fullDescription", "hide");
+        		dojo.toggleClass("showMore", "hide");
+        	}
+        </script>
+    </head>
+    <body class="tundra">
+    	<div id="summary">
+    		<br/>
+    		<strong>Summary</strong>
+	    	<p>
+	    		This page is an example of accessing data on a remote server and how cross-domain issues for the client are not a problem for the server. 
+	    		The TwitterContext handler, contained in examples/handlers, makes a request	to the Twitter search API and sends the data as a "tweets" 
+	    		object to the twitterExample.dtl file.  
+	    		<p/>
+	    		<div class="hide" id="fullDescription">
+		    		When you click on the "<strong>Refresh</strong>" link, an XHR call is made to <strong>http://localhost:8080/twitter/refresh</strong>, which accesses the TwitterContext handler.
+		    		The handler acquires new data from Twitter's servers and sends the "tweets" object to <strong>twitterRefresh.dtl</strong>. twitterRefresh.dtl then sends a string of HTML
+		    		back as the response to the original XHR request.
+		    		<p/>
+		    		This example shows how processing the results of requests can be handled by the server instead of processing the response with DOM interaction.  
+		    		<p/>
+	    		</div>
+	    		<a href="#" id="showMore" onclick="showMore(event)">Show More...</a>
+	    		<br/>
+	    		<br/>
+	    		<b>NOTE:</b> this example uses a generic, trending topic on twitter to help create a more frequent refresh rate.
+	    	</p>
+	    </div>
+	    <br/>
+    	<a href="#" onclick="refreshTweets(event)">Refresh</a>
+    	<div class="tweets" id="tweets">
+            {% for tweet in tweets %}
+            	<div class="twitter-div">
+            		<div class="twitter-messageDiv"><span class="from-user">{{ tweet.from_user }}:&nbsp;</span>{{ tweet.text }}</div>
+            		<span class="twitter-profileImage">
+            			<img src="{{ tweet.profile_image_url }}"/>
+            		</span>
+            	</div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

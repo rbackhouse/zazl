@@ -1,0 +1,10 @@
+[
+	{
+		"alias" : "/org/dojotoolkit/zazl/samples",
+		"base" : ""
+	},
+	{
+		"alias" : "/org/dojotoolkit/zazl/optimizer",
+		"base" : ""
+	}
+]	

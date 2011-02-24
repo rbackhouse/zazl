@@ -1,0 +1,30 @@
+{% load org.dojotoolkit.zazl.samples.tags.tag %}
+<html>
+    <head>
+        <title>Custom Tag Sample</title>
+		<link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+    	<div id="summary">
+    		<br/>
+    		<strong>Custom Tag Sample</strong>
+	    	<p>
+	    		This sample demonstrates creating and using a custom tag. The 'load' tag is used at the top of the template 
+	    		to declare the namespace of the tag to be loaded. The tag in this sample is called 'exampletag' and
+	    		will write content to the response.
+	    	</p>
+    		<br/>
+    		<strong>Source</strong>
+	    	<p>
+	    	<ul>
+	    	<li><a href="showsource?sourcePath=tag.dtl">resources/tag.dtl</a> - The template file</li>
+	    	<li><a href="showsource?sourcePath=handlers/TagContext.js">resources/handlers/TagContext.js</a> - The Context</li>
+	    	<li><a href="showsource?sourcePath=tags/tag.js">tags/tag.js</a> - The JavaScript that provides the Custom Tag</li>
+	    	</ul>
+	    	</p>
+	    </div>
+	    <hr style="color: #f00; background-color: #f00; height: 2px;">
+   		<br/>
+	    Calling example tag [ {% exampletag %} ]
+    </body>
+</html>

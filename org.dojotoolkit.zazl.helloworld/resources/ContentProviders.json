@@ -1,0 +1,10 @@
+[
+	{
+		"alias" : "/org/dojotoolkit/zazl/helloworld",
+		"base" : ""
+	},
+	{
+		"alias" : "/org/dojotoolkit/zazl/optimizer",
+		"base" : ""
+	}
+]	

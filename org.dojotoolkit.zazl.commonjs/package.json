@@ -1,0 +1,17 @@
+{
+   "name": "zazl",
+   "version": "1.0",
+   "description": "Dojo Zazl",
+   "author": "Richard Backhouse",
+   "keywords": ["dojo", "dojox", "dtl", "template", "django", "zazl"],
+   "maintainers": [
+       {
+           "name": "Richard Backhouse",
+           "email": "backhous@us.ibm.com",
+           "web": "http://dev.zazl.org"
+       }
+   ],
+    "dependencies": [
+        "narwhal"
+    ]
+}

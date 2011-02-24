@@ -1,0 +1,11 @@
+[
+	{
+		urlPattern: "testDTL$",
+		callback: "handlers.TestDTLContext"
+	},
+	{
+		urlPattern: "failDTL$",
+		callback: "handlers.FailingDTLContext"
+	}
+	
+]

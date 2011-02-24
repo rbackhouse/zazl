@@ -1,0 +1,231 @@
+<project name="assemble" basedir=".." default="assemble">
+    <!-- Properties -->
+	<property
+		name="target.dir"
+		value="${basedir}/bin/build.artifacts"/>
+	
+	<property
+		name="workspace.dir"
+		value="${basedir}/.."/>
+	
+	<property
+		name="dojo.dir"
+		value="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.5.0"/>
+	
+	<property
+		name="json.dir"
+		value="${workspace.dir}/../targetplatform/json/plugins/org.json_1.0.0"/>
+	
+	<property
+		name="uglifyjs.dir"
+		value="${workspace.dir}/../targetplatform/uglifyjs/plugins/org.uglifyjs_1.0.0"/>
+	
+	<property
+		name="httpclient.dir"
+		value="${workspace.dir}/../targetplatform/http-client/plugins"/>
+	
+	<property
+		name="equinox.dir"
+		value="${workspace.dir}/../targetplatform/equinox-SDK-3.6/plugins"/>
+	
+	<!-- Export the feature -->
+	<target name="assemble">
+		<mkdir dir="${target.dir}/package"/>
+		<mkdir dir="${target.dir}/package/server"/>
+		<mkdir dir="${target.dir}/package/server/library"/>
+		<mkdir dir="${target.dir}/package/examples"/>
+		<mkdir dir="${target.dir}/package/examples/css"/>
+		<mkdir dir="${target.dir}/package/examples/data"/>
+		<mkdir dir="${target.dir}/package/examples/handlers"/>
+		<copy file="${workspace.dir}/org.dojotoolkit.zazl.jetty/README.txt" todir="${target.dir}/package"/>
+		<copy todir="${target.dir}/package/server/library">
+	        <fileset dir="${equinox.dir}">
+	            <include name="javax.servlet_2.5.0*.jar"/>
+	            <include name="org.mortbay.jetty.server_6.*.jar"/>
+	            <include name="org.mortbay.jetty.util_6.*.jar"/>
+	        </fileset>
+	        <fileset dir="${httpclient.dir}">
+	            <include name="org.apache.commons.logging_1.1.1.*.jar"/>
+	        </fileset>
+	        <fileset dir="${httpclient.dir}/org.apache.httpcomponents.httpclient_4.0.3">
+	            <include name="*.jar"/>
+	        </fileset>
+	        <fileset dir="${httpclient.dir}/org.apache.httpcomponents.httpcore_4.1">
+	            <include name="*.jar"/>
+	        </fileset>
+	        <fileset dir="${target.dir}/plugins">
+	            <include name="*.jar"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/server">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/nativelib/win32">
+	            <include name="*.dll"/>
+	        </fileset>
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/nativelib/linux.x86">
+	            <include name="*.so"/>
+	        </fileset>
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/nativelib/macosx.x86">
+	            <include name="*.jnilib"/>
+	        </fileset>
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty">
+	            <include name="*.bat"/>
+	        </fileset>
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty">
+	            <include name="*.sh"/>
+	        </fileset>
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty">
+	            <include name="logging.properties"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/examples">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources">
+	            <include name="*.*"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/examples/css">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/css">
+	            <include name="*.*"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/examples/data">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/data">
+	            <include name="*.*"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/examples/handlers">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/handlers">
+	            <include name="*.*"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/examples/filters">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/filters">
+	            <include name="*.*"/>
+	        </fileset>
+		</copy>
+		<copy todir="${target.dir}/package/examples/tags">
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/tags">
+	            <include name="*.*"/>
+	        </fileset>
+		</copy>
+		<jar destfile="${target.dir}/package/server/library/v8javabridge.jar"
+			basedir="${workspace.dir}/org.dojotoolkit.rt.v8/bin"/>
+		<jar destfile="${target.dir}/package/server/dojo.jar">
+			<zipfileset dir="${dojo.dir}/dojo" prefix="dojo"/>
+			<zipfileset dir="${dojo.dir}/dijit" prefix="dijit"/>
+			<zipfileset dir="${dojo.dir}/dojox" prefix="dojox"/>
+		</jar>
+		<jar destfile="${target.dir}/package/server/library/jsonjs.jar">
+			<zipfileset dir="${json.dir}/json" prefix="json"/>
+		</jar>
+		<jar destfile="${target.dir}/package/server/library/uglifyjs.jar">
+			<zipfileset dir="${uglifyjs.dir}/uglifyjs" prefix="uglifyjs"/>
+		</jar>
+		<path id="classpath">
+	        <fileset dir="${target.dir}/package/server/library">
+    	        <include name="*.jar"/>
+        	</fileset>
+		</path>	
+	    <manifestclasspath property="jar.classpath"
+	                       jarfile="${target.dir}/package/server/library/zazljetty.jar">
+	      <classpath refid="classpath" />
+	    </manifestclasspath>
+		
+		<jar destfile="${target.dir}/package/server/library/zazljetty.jar"
+			basedir="${workspace.dir}/org.dojotoolkit.zazl.jetty/bin">
+			<manifest>
+				<attribute name="Class-Path" value="${jar.classpath}" />
+				<attribute name="Main-Class" value="org.dojotoolkit.zazl.jetty.internal.ZazlServer" />
+			</manifest>	
+		</jar>
+		
+		<zip destfile="${target.dir}/package/zazlserver.zip">
+			<fileset file="${workspace.dir}/org.dojotoolkit.zazl.jetty/LICENSE"/>
+			<fileset dir="${target.dir}/package"/>
+	    </zip>
+		
+		<tar destfile="${target.dir}/package/zazlserver.tar.gz" compression="gzip">
+			<tarfileset file="${workspace.dir}/org.dojotoolkit.zazl.jetty/LICENSE"/>
+			<tarfileset dir="${target.dir}/package">
+				<exclude name="**/*.sh"/> 
+				<exclude name="zazlserver.zip"/> 
+				<exclude name="**/org.dojotoolkit.dojo_*.jar"/> 
+				<exclude name="**/org.json_*.jar"/> 
+				<exclude name="**/org.uglifyjs_*.jar"/> 
+				<exclude name="**/org.dojotoolkit.optimizer.samples_*.jar"/> 
+				<exclude name="**/org.dojotoolkit.zazl.tests_*.jar"/> 
+			</tarfileset>
+			<tarfileset dir="${target.dir}/package/server" filemode="755" prefix="server">
+				<include name="*.sh"/> 
+			</tarfileset>
+		</tar>
+		
+		<zip destfile="${target.dir}/package/zazlsrc.zip">
+			<fileset file="${workspace.dir}/org.dojotoolkit.zazl.jetty/LICENSE"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.json/src" prefix="org.dojotoolkit.json/src"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/src" prefix="org.dojotoolkit.rt.v8/src"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/nativesrc" prefix="org.dojotoolkit.rt.v8/nativesrc">
+				<exclude name="**/v8src.zip"/> 
+			</zipfileset>	
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl/src" prefix="org.dojotoolkit.zazl/src"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl/jssrc" prefix="org.dojotoolkit.zazl/jssrc"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty/src" prefix="org.dojotoolkit.zazl.jetty/src"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.tests/src" prefix="org.dojotoolkit.zazl.tests/src"/>
+	    </zip>
+		
+		<zip destfile="${target.dir}/package/zazl-jack.zip">
+			<zipfileset dir="${dojo.dir}/dojo" prefix="zazl/lib/dojo"/>
+			<zipfileset dir="${dojo.dir}/dijit" prefix="zazl/lib/dijit"/>
+			<zipfileset dir="${dojo.dir}/dojox" prefix="zazl/lib/dojox"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.commonjs/lib" prefix="zazl/lib"/>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.commonjs" prefix="zazl">
+				<include name="**/package.json"/> 
+			</zipfileset>	
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl/jssrc" prefix="zazl/lib"/>
+		</zip>
+		
+		<zip destfile="${target.dir}/package/zazlexamples.zip">
+			<zipfileset file="${workspace.dir}//org.dojotoolkit.zazl.commonjs/lib/jackconfig.js" prefix="examples"/>
+			<zipfileset dir="${target.dir}/package/examples" prefix="examples"/>
+	    </zip>
+		<war destfile="${target.dir}/package/zazlsamples.war" webxml="${workspace.dir}/org.dojotoolkit.zazl.samples/WARContent/web.xml">
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.compressor/src" prefix="WEB-INF/classes">
+				<include name="org_dojotoolkit_compressor.properties"/> 
+			</zipfileset>
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.optimizer/src" prefix="WEB-INF/classes">
+				<include name="org_dojotoolkit_optimizer.properties"/> 
+			</zipfileset>
+			<fileset dir="${target.dir}/package/examples"/>
+			<zipfileset dir="${target.dir}/package/server" prefix="WEB-INF/lib">
+				<include name="dojo.jar"/> 
+			</zipfileset>	
+			<zipfileset dir="${target.dir}/package/server/library" prefix="WEB-INF/lib">
+				<include name="apache-mime*.jar"/> 
+				<include name="commons-codec*.jar"/> 
+				<include name="httpclient-4.*.jar"/> 
+				<include name="httpcore-4.*.jar"/> 
+				<include name="httpcore-nio-4*.jar"/> 
+				<include name="httpmime-4*.jar"/> 
+				<include name="org.mozilla.javascript*.jar"/> 
+				<include name="org.apache.commons.logging*.jar"/> 
+				<include name="org.dojotoolkit.json_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.zazl_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.zazl.servlet_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer*.jar"/> 
+				<include name="org.dojotoolkit.zazl.optimizer_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.compressor*.jar"/> 
+				<include name="org.dojotoolkit.server.util_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.shrinksafe_1.0.0*.jar"/> 
+				<include name="json*.jar"/> 
+				<include name="uglifyjs*.jar"/> 
+				<include name="v8javabridge.jar"/> 
+				<exclude name="org.dojotoolkit.optimizer.samples*.jar"/> 
+			</zipfileset>	
+		</war>
+	</target>
+
+	<!-- Clean up the target directory -->
+	<target name="clean">
+		<delete	dir="${target.dir}"/>
+		<mkdir dir="${target.dir}"/>
+	</target>
+</project>

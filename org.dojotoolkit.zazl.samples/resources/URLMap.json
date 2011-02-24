@@ -1,0 +1,54 @@
+[
+	{
+		"urlPattern": [ "^/personList", "^/personlist"],
+		"callback": "org.dojotoolkit.zazl.samples.handlers.PersonListContext",
+		"async" : true
+	},
+	{
+		"urlPattern": ["^/personGrid", "^/persongrid"],
+		"callback": "org.dojotoolkit.zazl.samples.handlers.PersonListContext",
+		"parameters": { "template": "grid" },
+		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory",
+		"async" : true
+	},
+	{
+		"urlPattern": "twitter/$",
+		"callback": "org.dojotoolkit.zazl.samples.handlers.TwitterContext",
+		"async" : true
+	},
+	{
+		"urlPattern": "twitter/refresh$",
+		"callback": "org.dojotoolkit.zazl.samples.handlers.TwitterContext",
+		"parameters": { "template": "refresh" },
+		"async" : true
+	},
+	{
+		"urlPattern": "^/snoop",
+		"callback": "org.dojotoolkit.zazl.samples.handlers.SnoopContext"
+	},
+	{
+		"urlPattern": "^/helloworld",
+	 	"callback": "org.dojotoolkit.zazl.samples.handlers.HelloWorldContext"
+	},
+	{
+		"urlPattern": "^/requestparam",
+	 	"callback": "org.dojotoolkit.zazl.samples.handlers.RequestParamContext"
+	},
+	{
+		"urlPattern": "^/filterexample",
+	 	"callback": "org.dojotoolkit.zazl.samples.handlers.FilterContext"
+	},
+	{
+		"urlPattern": "^/tagexample",
+	 	"callback": "org.dojotoolkit.zazl.samples.handlers.TagContext"
+	},
+	{
+		"urlPattern": "^/weatherconditions",
+	 	"callback": "org.dojotoolkit.zazl.samples.handlers.WeatherConditionsContext",
+		"async" : true
+	},
+	{
+		"urlPattern": "^/showsource",
+	 	"callback": "org.dojotoolkit.zazl.samples.handlers.ShowSourceContext"
+	}
+]

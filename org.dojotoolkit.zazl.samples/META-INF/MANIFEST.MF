@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Samples Plug-in
+Bundle-SymbolicName: org.dojotoolkit.zazl.samples;singleton:=true
+Bundle-Version: 1.0.0.qualifier

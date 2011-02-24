@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Hello, World</title>
+		<link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+    	<div id="summary">
+    		<br/>
+    		<strong>Hello World Sample</strong>
+	    	<p>
+	    		This sample demonstrates using DTL variables and filters. The context handler sets the value of the helloWorld
+	    		variable to an HTML tag setting the value bold. The use of the 'safe' filter ensures that the contents of 
+	    		the helloWorld variable is not escaped.  
+	    	</p>
+    		<br/>
+    		<strong>Source</strong>
+	    	<p>
+	    	<ul>
+	    	<li><a href="showsource?sourcePath=helloworld.dtl">resources/helloworld.dtl</a> - The template file</li>
+	    	<li><a href="showsource?sourcePath=handlers/HelloWorldContext.js">resources/handlers/HelloWorldContext.js</a> - The Context that loads the helloWorld variable</li>
+	    	</ul>
+	    	</p>
+	    </div>
+	    <hr style="color: #f00; background-color: #f00; height: 2px;">
+	    <br/>
+    	{{ helloWorld|safe }}
+    </body>
+</html>

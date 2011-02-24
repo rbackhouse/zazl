@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Zazl Servlet
+Bundle-SymbolicName: org.dojotoolkit.zazl.servlet
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: javax.servlet,
+ javax.servlet.http,
+ org.dojotoolkit.compressor,
+ org.dojotoolkit.json,
+ org.dojotoolkit.server.util.resource,
+ org.dojotoolkit.server.util.rhino,
+ org.dojotoolkit.zazl,
+ org.dojotoolkit.zazl.callback,
+ org.dojotoolkit.zazl.contentprovider,
+ org.dojotoolkit.zazl.util,
+ org.osgi.framework,
+ org.osgi.service.http,
+ org.osgi.util.tracker
+Export-Package: org.dojotoolkit.zazl.servlet

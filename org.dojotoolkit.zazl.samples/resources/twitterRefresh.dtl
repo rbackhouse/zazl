@@ -1,0 +1,8 @@
+ {% for tweet in tweets %}
+	<div class="twitter-div">
+		<div class="twitter-messageDiv"><span class="from-user">{{ tweet.from_user }}:&nbsp;</span>{{ tweet.text }}</div>
+		<span class="twitter-profileImage">
+			<img src="{{ tweet.profile_image_url }}"/>
+		</span>
+	</div>
+{% endfor %}

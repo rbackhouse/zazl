@@ -1,0 +1,27 @@
+[
+	{
+		firstName: "John",
+		lastName: "Smtih",
+		emailAddress: "jsmith@gmail.com"
+	},
+	{
+		firstName: "Mike",
+		lastName: "Jones",
+		emailAddress: "mjones@yahoo.com"
+	},
+	{
+		firstName: "Eric",
+		lastName: "Winner",
+		emailAddress: "ewinner@gmail.com"
+	},
+	{
+		firstName: "Susan",
+		lastName: "Defranco",
+		emailAddress: "sdefranco@hotmail.com"
+	},
+	{
+		firstName: "Elizabeth",
+		lastName: "Huggings",
+		emailAddress: "ehuggins@aol.com"
+	}
+]

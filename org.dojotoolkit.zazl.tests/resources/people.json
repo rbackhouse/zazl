@@ -1,0 +1,27 @@
+[
+	{
+		firstName: "Richard",
+		lastName: "Backhouse",
+		emailAddress: "backhous@us.ibm.com"
+	},
+	{
+		firstName: "Bill",
+		lastName: "Higgins",
+		emailAddress: "bhiggins@us.ibm.com"
+	},
+	{
+		firstName: "Matt",
+		lastName: "Jarvis",
+		emailAddress: "majarvis@us.ibm.com"
+	},
+	{
+		firstName: "John",
+		lastName: "Ryding",
+		emailAddress: "jryding@us.ibm.com"
+	},
+	{
+		firstName: "Randy",
+		lastName: "Hudson",
+		emailAddress: "hudsonr@us.ibm.com"
+	}
+]

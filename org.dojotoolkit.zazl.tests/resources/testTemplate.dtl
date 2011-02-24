@@ -1,0 +1,3 @@
+{% for param in parameters %}
+    {{ param.name }} :  {{ param.value }}
+{% endfor %}

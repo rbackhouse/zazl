@@ -1,0 +1,71 @@
+{% load org.dojotoolkit.zazl.optimizer.tag.jstag %}
+<html>
+    <head>
+        <title>Person Grid</title>
+        <style type="text/css">
+            @import "{{contextRoot}}/dojo/resources/dojo.css";
+            
+            #summary {
+            	border-bottom:1px solid black;
+            	width: 40%;
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+        <link id="themeStyles" rel="stylesheet" href="{{contextRoot}}/dijit/themes/tundra/tundra.css"/>
+		<link id="themeStyles" rel="stylesheet" href="{{contextRoot}}/dojox/grid/resources/Grid.css"/>
+		<link id="themeStyles" rel="stylesheet" href="{{contextRoot}}/dojox/grid/resources/tundraGrid.css"/>
+		<script type="text/javascript">
+			djConfig = {
+				isDebug: false,
+				usePlainJson: true,
+				parseOnLoad: true,
+				baseUrl: "{{contextRoot}}/dojo/",
+				locale: "{{request.locale}}",
+				localizationComplete: true
+			};
+		</script>
+		{% jslinks org.dojotoolkit.zazl.samples.PersonGrid org.dojotoolkit.zazl.samples:.. %}        
+		<script type="text/javascript">
+  			dojo.require("org.dojotoolkit.zazl.samples.PersonGrid");
+		</script>        
+		<script type="text/javascript">
+	        var data = {
+	            identifier: 'firstName',
+	            label: 'firstName',
+	            items: [
+		            {% for person in people %}
+        		        { 
+        		        	firstName: '{{ person.firstName }}', 
+        		        	lastName: '{{ person.lastName }}', 
+        		        	emailAddress: '{{ person.emailAddress }}' 
+        		        } {% if not forloop.last %} , {% endif %}
+            		{% endfor %}
+	            ]
+	        };
+			var personStore = new dojo.data.ItemFileReadStore({data: data});
+	        
+		</script>        
+    </head>
+    <body class="tundra">
+    	<div id="summary">
+    		<br/>
+    		<strong>Summary</strong>
+	    	<p>
+	    		This page is an example of loading data contained on the server and using the resources that dojo offers. 
+	    		We acquire the list of people for this page in the PersonListContext handler, contained in examples/handlers/.  
+	    		This handler loads the data in data/people.json, then sends the data to the persongrid.dtl file as a "people" 
+	    		object. The template then iterates through the "people" object to create the list on this page.
+	    	</p>
+    	</div>
+    	<br/>
+    	<table id="persongrid" dojoType="dojox.grid.DataGrid" store="personStore">
+			<thead>
+				<tr>
+					<th field="firstName" width="100px">First Name</th>
+					<th field="lastName" width="100px">Last Name</th>
+					<th field="emailAddress" width="100px">Email Address</th>
+				</tr>
+			</thead>
+    	</table>
+    </body>
+</html>

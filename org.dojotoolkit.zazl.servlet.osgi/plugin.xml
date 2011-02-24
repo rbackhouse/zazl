@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension-point id="contentProvider" name="Content Provider" schema="schema/contentProvider.exsd"/>
+	<extension-point id="callbackHandler" name="Zazl Callback Handler" schema="schema/callbackHandler.exsd"/>
+</plugin>

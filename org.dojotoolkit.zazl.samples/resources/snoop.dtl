@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>Snoop</title>
+        <style type="text/css">
+            @import "{{contextRoot}}/dojo/resources/dojo.css";
+            
+            #summary {
+            	border-bottom:1px solid black;
+            	width: 40%;
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" href="{{contextRoot}}/css/styles.css">
+    </head>
+    <body>
+    	<div id="summary">
+    		<br/>
+    		<strong>Summary</strong>
+	    	<p>
+	    		This example is used to display the properties available from the provided request object.
+	    		
+	    		The list of headers on this page were created from a Django Template for-loop, which was parsed and created on the server.
+	    	</p>
+	    </div>
+	    <br/>
+        <ul>
+	        <li> requestMethod : {{ request.requestMethod }}</li>
+			<li> urlPath : {{ request.urlPath }}</li>
+	    	<li> pathInfo : {{ request.pathInfo }}</li>
+	    	<li> queryString : {{ request.queryString }}</li>
+	    	<li> contentType : {{ request.contentType }}</li>
+	    	<li> contentLength : {{ request.contentLength }}</li>
+	    	<li> serverName : {{ request.serverName }}</li>
+	    	<li> serverPort : {{ request.serverPort }}</li>
+	    	<li> serverProtocol : {{ request.serverProtocol }}</li>
+			<li> gatewayInterface : {{ request.gatewayInterface }}</li>
+			<li> serverSoftware : {{ request.serverSoftware }}</li>
+			<li> pathTranslated : {{ request.pathTranslated }}</li>
+			<li> remoteHost : {{ request.remoteHost }}</li>
+			<li> remoteAddr : {{ request.remoteAddr }}</li>
+			<li> remoteUser : {{ request.remoteUser }}</li>
+			<li> authType : {{ request.authType }}</li>
+            
+        </ul>
+	    <br/>
+		    
+        <ul>
+    		<strong>Headers</strong>
+		    <br/>
+            {% for header in request.headers %}
+                <li>{{ header.name }} : {{ header.value }}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+    		<strong>Parameters</strong>
+		    <br/>
+            {% for parameter in parameterList %}
+                <li>{{ parameter.name }} : {{ parameter.value }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
