@@ -69,9 +69,11 @@
 	        </fileset>
 	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty">
 	            <include name="*.bat"/>
+	            <exclude name="run-zazl-debug.bat"/>
 	        </fileset>
 	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty">
 	            <include name="*.sh"/>
+	            <exclude name="run-zazl-debug.sh"/>
 	        </fileset>
 	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty">
 	            <include name="logging.properties"/>
