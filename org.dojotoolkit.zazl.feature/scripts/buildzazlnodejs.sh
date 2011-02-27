@@ -17,7 +17,7 @@ cp ../../zazl/org.dojotoolkit.zazl.optimizer/tag/jstag.js ./zazlserver/lib/org/d
 cp ../../zazl/org.dojotoolkit.zazl/jssrc/dojox/serverdtl/Request.js ./zazlserver/lib/dojox/serverdtl/.
 cp ../../zazl/org.dojotoolkit.zazl/jssrc/dojox/serverdtl/util.js ./zazlserver/lib/dojox/serverdtl/.
 cd ..
-tar cvzf node_modules.taz.gz node_modules/*
+tar cvzf node_modules.tar.gz node_modules/*
 rm -R zazlnodejs
 rm zazlnodejs.taz.gz
 mkdir -p zazlnodejs/node_modules
@@ -40,6 +40,6 @@ mv ./zazlnodejs/samples/*.js ./zazlnodejs/samples/org/dojotoolkit/zazl/samples/
 mv ./zazlnodejs/samples/handlers/* ./zazlnodejs/samples/org/dojotoolkit/zazl/samples/handlers/
 mv ./zazlnodejs/samples/filters/* ./zazlnodejs/samples/org/dojotoolkit/zazl/samples/filters/
 mv ./zazlnodejs/samples/tags/* ./zazlnodejs/samples/org/dojotoolkit/zazl/samples/tags/
-tar cvzf zazlnodejs.taz.gz zazlnodejs/*
+tar cvzf zazlnodejs.tar.gz zazlnodejs/*
 
  
