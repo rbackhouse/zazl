@@ -25,10 +25,6 @@ public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
 		this.contentProviders = contentProviders;
 	}
 
-	public URL getResource(String path) throws IOException {
-		return _getResource(normalizePath(path));
-	}
-	
 	protected URL _getResource(String path) throws IOException {
 		URL url = internalGetResource(path, "/jssrc");
 		return url;

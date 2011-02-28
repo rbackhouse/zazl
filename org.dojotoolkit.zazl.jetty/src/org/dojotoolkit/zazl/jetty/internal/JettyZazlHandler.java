@@ -34,8 +34,8 @@ public class JettyZazlHandler extends AbstractHandler {
 		try {
 			zazlHandler.initialize(Boolean.valueOf(System.getProperty("V8", "false")), 
 					               Boolean.valueOf(System.getProperty("DEBUG", "false")), 
-					               new File(root, "URLMap.json").toURL(), 
-					               new File(root, "CallbackConfig.json").toURL(), 
+					               new File(root, "URLMap.json").toURI().toURL(), 
+					               new File(root, "CallbackConfig.json").toURI().toURL(), 
 					               resourceLoader, 
 					               rhinoClassLoader);
 		} catch (MalformedURLException e) {

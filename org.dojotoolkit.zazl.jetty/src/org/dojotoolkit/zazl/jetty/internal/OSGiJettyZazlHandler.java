@@ -25,7 +25,7 @@ public class OSGiJettyZazlHandler extends JettyZazlHandler implements CallbackHa
 		try {
 			zazlHandler.initialize(Boolean.valueOf(System.getProperty("V8", "false")), 
 					               Boolean.valueOf(System.getProperty("DEBUG", "false")), 
-					               new File(root, "URLMap.json").toURL(), 
+					               new File(root, "URLMap.json").toURI().toURL(), 
 					               null, 
 					               resourceLoader, 
 					               rhinoClassLoader);

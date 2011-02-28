@@ -36,10 +36,6 @@ public class OSGiResourceLoader extends JSCompressorResourceLoader implements Co
 		this.contentProviderList = new ArrayList<ContentProvider>();
 	}
 	
-	public URL getResource(String path) throws IOException {
-		return _getResource(normalizePath(path));
-	}
-	
 	protected URL _getResource(String path) throws IOException {
 		if (bundles == null) {
 			bundles = new Bundle[bundleIds.length];

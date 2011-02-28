@@ -38,7 +38,7 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 		File contentProvidersFile = new File(root, "ContentProviders.json");
 		if (contentProvidersFile.exists()) {
 			try {
-				ContentProvider[] contentProviders = Util.loadContentProviders(contentProvidersFile.toURL());
+				ContentProvider[] contentProviders = Util.loadContentProviders(contentProvidersFile.toURI().toURL());
 				for (ContentProvider contentProvider : contentProviders) {
 					contentProviderList.add(contentProvider);
 				}
@@ -46,10 +46,6 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public URL getResource(String path) throws IOException {
-		return _getResource(normalizePath(path));
 	}
 	
 	protected URL _getResource(String path) throws IOException {
@@ -79,7 +75,7 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 		File f = new File(root, path);
 		if (f.exists()) {
 			timestampLookup.put(originalPath, f);
-			url = f.toURL();
+			url = f.toURI().toURL();
 		}
 		else {
 			url = getClass().getClassLoader().getResource(path);
