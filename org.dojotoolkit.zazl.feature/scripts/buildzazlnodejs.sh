@@ -1,7 +1,7 @@
 #!/bin/sh
 
 rm -R node_modules
-rm node_modules.taz.gz
+rm node_modules.tar.gz
 mkdir node_modules
 cd node_modules
 mkdir jsoptimizer
@@ -11,6 +11,7 @@ mkdir -p zazlserver/lib/dojox/serverdtl
 cp -R ../../zazl/org.dojotoolkit.optimizer.nodejs/jsoptimizer/* ./jsoptimizer/
 mkdir ./jsoptimizer/lib/optimizer/
 cp -R ../../zazl/org.dojotoolkit.optimizer/optimizer/* ./jsoptimizer/lib/optimizer/
+cp -R ../../zazl/org.dojotoolkit.optimizer.amd/optimizer/* ./jsoptimizer/lib/optimizer/
 cp -R ../../zazl/org.dojotoolkit.server.util.nodejs/zazlutil/* ./zazlutil/
 cp -R ../../zazl/org.dojotoolkit.zazl.nodejs/zazlserver/* ./zazlserver/
 cp ../../zazl/org.dojotoolkit.zazl.optimizer/tag/jstag.js ./zazlserver/lib/org/dojotoolkit/zazl/optimizer/tag/.
@@ -19,7 +20,7 @@ cp ../../zazl/org.dojotoolkit.zazl/jssrc/dojox/serverdtl/util.js ./zazlserver/li
 cd ..
 tar cvzf node_modules.tar.gz node_modules/*
 rm -R zazlnodejs
-rm zazlnodejs.taz.gz
+rm zazlnodejs.tar.gz
 mkdir -p zazlnodejs/node_modules
 cp -R ./node_modules/* ./zazlnodejs/node_modules/
 mkdir -p zazlnodejs/dojo/dojo

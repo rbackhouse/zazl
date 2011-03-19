@@ -28,17 +28,6 @@ import org.dojotoolkit.zazl.contentprovider.Util;
 
 public class ZazlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String[] ignoreList = new String[] {
-		"/dojo/dojo.js", 
-		"^/optimizer/", 
-		"^/uglifyjs/", 
-		"^/jssrc/", 
-		"/dtlapp.js", 
-		"/dtlenv.js", 
-		"/env.js",
-		".*/nls/.*"
-	};
-
 	protected ZazlHandler zazlHandler = null;
 	protected ResourceLoader resourceLoader = null;
 	
@@ -74,7 +63,7 @@ public class ZazlServlet extends HttpServlet {
 					jsCompressorFactory = new JSCompressorFactoryImpl();
 				}
 
-				resourceLoader = new ServletDTLResourceHandler(getServletContext(), contentProviders, jsCompressorFactory, ignoreList);
+				resourceLoader = new ServletDTLResourceHandler(getServletContext(), contentProviders, jsCompressorFactory);
 				getServletContext().setAttribute("org.dojotoolkit.ResourceLoader", resourceLoader);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();

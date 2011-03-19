@@ -25,17 +25,6 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 public class Activator implements BundleActivator, BundleListener, ServiceTrackerCustomizer {
-	private static String[] ignoreList = new String[] {
-		"/dojo/dojo.js", 
-		"^/optimizer/", 
-		"^/uglifyjs/", 
-		"^/jssrc/", 
-		"/dtlapp.js", 
-		"/dtlenv.js", 
-		"/env.js",
-		".*/nls/.*"
-	};
-	
 	private ZazlServer dtlServer = null;
 	private BundleContext context = null;
 	private BundleResourceHandler[] bundleHandlers = null;
@@ -155,7 +144,7 @@ public class Activator implements BundleActivator, BundleListener, ServiceTracke
 					String compressorType = System.getProperty("compressorType");
 					JSCompressorFactory jsCompressorFactory = getJSCompressorFactory(useV8, compressorType);
 					
-					OSGiJettyResourceLoader resourceLoader = new OSGiJettyResourceLoader(root, bundleHandlers, context, jsCompressorFactory, ignoreList);
+					OSGiJettyResourceLoader resourceLoader = new OSGiJettyResourceLoader(root, bundleHandlers, context, jsCompressorFactory);
 					OSGiJettyZazlHandler zazlHandler = new OSGiJettyZazlHandler();  
 
 					dtlServer = new ZazlServer(root, bundleHandlers);

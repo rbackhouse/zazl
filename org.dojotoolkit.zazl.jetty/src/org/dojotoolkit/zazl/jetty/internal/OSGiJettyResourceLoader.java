@@ -17,8 +17,8 @@ import org.osgi.framework.BundleContext;
 public class OSGiJettyResourceLoader extends JettyResourceLoader implements ContentProviderRegistryListener {
 	private BundleContext context = null;
 	
-	public OSGiJettyResourceLoader(File root, ResourceHandler[] resourceHandlers, BundleContext context, JSCompressorFactory jsCompressorFactory, String[] ignoreList) {
-		super(root, resourceHandlers, jsCompressorFactory, ignoreList);
+	public OSGiJettyResourceLoader(File root, ResourceHandler[] resourceHandlers, BundleContext context, JSCompressorFactory jsCompressorFactory) {
+		super(root, resourceHandlers, jsCompressorFactory);
 		this.context = context;
 	}
 

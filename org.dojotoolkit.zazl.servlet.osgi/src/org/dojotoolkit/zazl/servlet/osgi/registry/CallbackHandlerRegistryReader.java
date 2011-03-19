@@ -40,8 +40,10 @@ public class CallbackHandlerRegistryReader implements IRegistryEventListener {
 	}
 	
 	public void stop() {
-		extensionRegistry.removeListener(this);
-		extensionRegistry = null;
+		if (extensionRegistry != null) {
+			extensionRegistry.removeListener(this);
+			extensionRegistry = null;
+		}
 	}
 	
 

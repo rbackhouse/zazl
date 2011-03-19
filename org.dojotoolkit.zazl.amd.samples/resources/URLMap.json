@@ -1,0 +1,7 @@
+[
+	{
+		"urlPattern": "^/calendar",
+	 	"callback": "app.CalendarContext",
+		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory"
+	}
+]

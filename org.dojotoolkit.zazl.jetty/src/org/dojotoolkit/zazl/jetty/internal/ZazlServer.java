@@ -22,9 +22,9 @@ import java.util.Map;
 import org.dojotoolkit.compressor.JSCompressorFactory;
 import org.dojotoolkit.compressor.JSCompressorFactoryImpl;
 import org.dojotoolkit.json.JSONParser;
-import org.dojotoolkit.optimizer.JSOptimizer;
-import org.dojotoolkit.optimizer.rhino.RhinoJSOptimizer;
-import org.dojotoolkit.optimizer.v8.V8JSOptimizer;
+import org.dojotoolkit.optimizer.JSOptimizerFactory;
+import org.dojotoolkit.optimizer.rhino.RhinoJSOptimizerFactory;
+import org.dojotoolkit.optimizer.v8.V8JSOptimizerFactory;
 import org.dojotoolkit.server.util.resource.ResourceLoader;
 import org.dojotoolkit.server.util.rhino.RhinoClassLoader;
 import org.mortbay.jetty.Connector;
@@ -40,16 +40,6 @@ public class ZazlServer {
 	static {
 		org.mortbay.log.Log.setLog(new ZazlServer.NullLogger());
 	}
-	private static String[] ignoreList = new String[] {
-		"/dojo/dojo.js", 
-		"^/optimizer/", 
-		"^/uglifyjs/", 
-		"^/jssrc/", 
-		"/dtlapp.js", 
-		"/dtlenv.js", 
-		"/env.js",
-		".*/nls/.*"
-	};
 	
 	private Server server = new Server();
 	private File root = null;
@@ -77,14 +67,14 @@ public class ZazlServer {
 
 			boolean useV8 = Boolean.valueOf(System.getProperty("V8", "false"));
 			boolean javaChecksum = Boolean.valueOf(System.getProperty("javaChecksum", "false"));
-			JSOptimizer jsOptimizer = null;
+			JSOptimizerFactory jsOptimizerFactory = null;
 			if (useV8) {
-				jsOptimizer = new V8JSOptimizer(resourceLoader, rhinoClassLoader, javaChecksum);
+				jsOptimizerFactory = new V8JSOptimizerFactory();
 			} else {
-				jsOptimizer = new RhinoJSOptimizer(resourceLoader, rhinoClassLoader, javaChecksum);
+				jsOptimizerFactory = new RhinoJSOptimizerFactory();
 			}
-			zazlHandler.initialize(root, resourceLoader, rhinoClassLoader, jsOptimizer); 
-			JSContentHandler jsContentHandler = new JSContentHandler(resourceLoader, jsOptimizer); 
+			JSContentHandler jsContentHandler = new JSContentHandler(resourceLoader, jsOptimizerFactory, rhinoClassLoader, javaChecksum); 
+			zazlHandler.initialize(root, resourceLoader, rhinoClassLoader, jsContentHandler.getJSOptimizer()); 
 			ResourceHandler rootHandler = new ResourceHandler();
 			rootHandler.setBaseResource(new FileResource(new URL("file:"+root.getCanonicalPath())));
 			handlerList.addHandler(zazlHandler);
@@ -135,7 +125,7 @@ public class ZazlServer {
 				if (compressJS != null && compressJS.equalsIgnoreCase("true")) {
 					jsCompressorFactory = new JSCompressorFactoryImpl();
 				}
-				ResourceLoader resourceLoader = new JettyResourceLoader(root, resourceHandlers, jsCompressorFactory, ignoreList);
+				ResourceLoader resourceLoader = new JettyResourceLoader(root, resourceHandlers, jsCompressorFactory);
 				ZazlServer dtlServer = new ZazlServer(root, resourceHandlers);
 				JettyZazlHandler zazlHandler = new JettyZazlHandler();
 				dtlServer.start(zazlHandler, resourceLoader);

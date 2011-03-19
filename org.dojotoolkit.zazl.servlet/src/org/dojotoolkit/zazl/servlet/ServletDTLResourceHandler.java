@@ -19,8 +19,8 @@ public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
 	private ServletContext servletContext = null;
 	private ContentProvider[] contentProviders = null;
 
-	public ServletDTLResourceHandler(ServletContext servletContext, ContentProvider[] contentProviders, JSCompressorFactory jsCompressorFactory, String[] ignoreList) {
-		super(jsCompressorFactory, ignoreList);
+	public ServletDTLResourceHandler(ServletContext servletContext, ContentProvider[] contentProviders, JSCompressorFactory jsCompressorFactory) {
+		super(jsCompressorFactory);
 		this.servletContext = servletContext;
 		this.contentProviders = contentProviders;
 	}
@@ -55,6 +55,9 @@ public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
 	}
 	
 	private URL searchPaths(String path, String jsSrcPrefix, String originalPath) throws IOException {
+		if (path.charAt(0) != '/') {
+			path = '/'+path;
+		}
 		URL url = servletContext.getResource(path);
 		if (url != null) {
 			String realPath = servletContext.getRealPath(path);

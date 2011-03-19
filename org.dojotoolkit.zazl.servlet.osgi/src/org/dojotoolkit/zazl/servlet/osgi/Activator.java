@@ -14,8 +14,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 
 import org.dojotoolkit.compressor.JSCompressorFactory;
-import org.dojotoolkit.optimizer.JSOptimizer;
 import org.dojotoolkit.optimizer.JSOptimizerFactory;
+import org.dojotoolkit.optimizer.servlet.JSHandler;
 import org.dojotoolkit.optimizer.servlet.JSServlet;
 import org.dojotoolkit.server.util.rhino.RhinoClassLoader;
 import org.dojotoolkit.zazl.servlet.osgi.registry.CallbackHandlerRegistryReader;
@@ -33,17 +33,6 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 public class Activator implements BundleActivator, ServiceTrackerCustomizer, BundleListener  {
-	private static String[] ignoreList = new String[] {
-		"/dojo/dojo.js", 
-		"^/optimizer/", 
-		"^/uglifyjs/", 
-		"^/jssrc/", 
-		"/dtlapp.js", 
-		"/dtlenv.js", 
-		"/env.js", 
-		".*/nls/.*"
-	};
-
 	private static Logger logger = Logger.getLogger("org.dojotoolkit.zazl.servlet.osgi");
     private HttpService httpService = null;
     private ServiceTracker httpServiceTracker = null;
@@ -73,10 +62,9 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
 		registryTracker = new ServiceTracker(context, IExtensionRegistry.class.getName(), this);
 		registryTracker.open();
 		boolean useV8 = Boolean.valueOf(System.getProperty("V8", "false"));
-		String compressorType = System.getProperty("compressorType");
-		jsCompressorFactoryTracker = new JSCompressorFactoryServiceTracker(context, useV8, compressorType);
+		jsCompressorFactoryTracker = new JSCompressorFactoryServiceTracker(context, useV8, System.getProperty("compressorType"));
 		jsCompressorFactoryTracker.open();
-		jsOptimizerFactoryServiceTracker = new JSOptimizerFactoryServiceTracker(context, useV8);
+		jsOptimizerFactoryServiceTracker = new JSOptimizerFactoryServiceTracker(context, useV8, System.getProperty("jsHandlerType"));
 		jsOptimizerFactoryServiceTracker.open();
 	}
 
@@ -139,28 +127,25 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
 					}
 					String[] bundleIds = new String[bundleIdList.size()];
 					bundleIds = bundleIdList.toArray(bundleIds);
-					resourceHandler = new OSGiResourceLoader(context, serverDTLBundle, bundleIds, jsCompressorFactory, ignoreList);
+					resourceHandler = new OSGiResourceLoader(context, serverDTLBundle, bundleIds, jsCompressorFactory);
 					contentProviderRegistryReader.start(extensionRegistry, resourceHandler);
 					RhinoClassLoader rhinoClassLoader = new RhinoClassLoader(resourceHandler);
 
 		            OSGiZazlServlet zazlServlet = new OSGiZazlServlet(resourceHandler, rhinoClassLoader);
 					callbackHandlerRegistryReader.start(extensionRegistry, zazlServlet);
 
-					JSOptimizer jsOptimizer = jsOptimizerFactory.createJSOptimizer(resourceHandler, rhinoClassLoader, javaChecksum);
-					if (jsOptimizer != null) {
-			            JSServlet jsServlet = new JSServlet(resourceHandler, jsOptimizer, rhinoClassLoader);
-			            try {
-			    			logger.logp(Level.CONFIG, getClass().getName(), "initialize", "Registering zazlServlet");
-							httpService.registerServlet("/", zazlServlet, null, ZazlHttpContext.getSingleton(httpService.createDefaultHttpContext()));
-			    			logger.logp(Level.CONFIG, getClass().getName(), "initialize", "Registering jsServlet");
-							httpService.registerServlet("/_javascript", jsServlet, null, ZazlHttpContext.getSingleton(httpService.createDefaultHttpContext()));
-						} catch (ServletException e) {
-							e.printStackTrace();
-						} catch (NamespaceException e) {
-							e.printStackTrace();
-						}
-						initialized = true;
+		            JSServlet jsServlet = new JSServlet(resourceHandler, jsOptimizerFactory, rhinoClassLoader, javaChecksum, System.getProperty("jsHandlerType"));
+		            try {
+		    			logger.logp(Level.CONFIG, getClass().getName(), "initialize", "Registering zazlServlet");
+						httpService.registerServlet("/", zazlServlet, null, ZazlHttpContext.getSingleton(httpService.createDefaultHttpContext()));
+		    			logger.logp(Level.CONFIG, getClass().getName(), "initialize", "Registering jsServlet");
+						httpService.registerServlet("/_javascript", jsServlet, null, ZazlHttpContext.getSingleton(httpService.createDefaultHttpContext()));
+					} catch (ServletException e) {
+						e.printStackTrace();
+					} catch (NamespaceException e) {
+						e.printStackTrace();
 					}
+					initialized = true;
 				}
 			}
 		}
@@ -225,18 +210,28 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
 	
 	private class JSOptimizerFactoryServiceTracker extends ServiceTracker {
 		private boolean useV8 = false;
+		private String jsHandlerType = null;
 		
-		public JSOptimizerFactoryServiceTracker(BundleContext context, boolean useV8) {
+		public JSOptimizerFactoryServiceTracker(BundleContext context, boolean useV8, String jsHandlerType) {
 			super(context, JSOptimizerFactory.class.getName(), null);
 			this.useV8 = useV8;
+			this.jsHandlerType = jsHandlerType;
 		}
 		
 		public Object addingService(ServiceReference reference) {
 			String dojoServiceId = null;
-			if (useV8) {
-				dojoServiceId = "V8JSOptimizer";
+			if (jsHandlerType.equals(JSHandler.AMD_HANDLER_TYPE)) {
+				if (useV8) {
+					dojoServiceId = "AMDV8JSOptimizer";
+				} else {
+					dojoServiceId = "AMDRhinoJSOptimizer";
+				}
 			} else {
-				dojoServiceId = "RhinoJSOptimizer";
+				if (useV8) {
+					dojoServiceId = "V8JSOptimizer";
+				} else {
+					dojoServiceId = "RhinoJSOptimizer";
+				}
 			}
 			if (dojoServiceId != null && reference.getProperty("dojoServiceId").equals(dojoServiceId)) {
 				jsOptimizerFactory = (JSOptimizerFactory)context.getService(reference);

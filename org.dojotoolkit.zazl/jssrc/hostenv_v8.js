@@ -87,3 +87,6 @@ dojo._isDocumentOk = function(http){
 		stat == 1223 || 						// get it out of the cache
 		(!stat && (location.protocol=="file:" || location.protocol=="chrome:") ); // Internet Explorer mangled the status code
 };
+
+dojo.addOnWindowUnload = function() {};
+

@@ -11,21 +11,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dojotoolkit.optimizer.JSOptimizer;
+import org.dojotoolkit.optimizer.JSOptimizerFactory;
+import org.dojotoolkit.optimizer.servlet.JSHandler;
+import org.dojotoolkit.optimizer.servlet.SyncLoaderJSHandler;
+import org.dojotoolkit.server.util.resource.ResourceLoader;
+import org.dojotoolkit.server.util.rhino.RhinoClassLoader;
 import org.mortbay.jetty.HttpConnection;
 import org.mortbay.jetty.Request;
 import org.mortbay.jetty.handler.AbstractHandler;
 
-import org.dojotoolkit.optimizer.JSOptimizer;
-import org.dojotoolkit.optimizer.servlet.JSHandler;
-import org.dojotoolkit.optimizer.servlet.JSServlet;
-import org.dojotoolkit.server.util.resource.ResourceLoader;
-
 public class JSContentHandler extends AbstractHandler {
 	private JSHandler jsHandler = null;
 	
-	public JSContentHandler(ResourceLoader resourceLoader, JSOptimizer jsOptimizer) {
-		jsHandler = new JSHandler();
-		jsHandler.initialize(resourceLoader, jsOptimizer, JSServlet.bootstrapModules, JSServlet.debugBootstrapModules);
+	public JSContentHandler(ResourceLoader resourceLoader, JSOptimizerFactory jsOptimizerFactory, RhinoClassLoader rhinoClassLoader, boolean javaChecksum) {
+		jsHandler = new SyncLoaderJSHandler();
+		jsHandler.initialize(resourceLoader, rhinoClassLoader, javaChecksum, jsOptimizerFactory);
 	}
 
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, int dispatch) throws IOException, ServletException {
@@ -35,5 +36,9 @@ public class JSContentHandler extends AbstractHandler {
 				jettyRequest.setHandled(true);
 			}
 		}
+	}
+	
+	public JSOptimizer getJSOptimizer() {
+		return jsHandler.getJSOptimizer();
 	}
 }

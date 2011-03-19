@@ -16,34 +16,6 @@
       [Enter License Description here.]
    </license>
 
-   <includes
-         id="org.dojotoolkit.optimizer.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dojotoolkit.compressor.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dojotoolkit.compressor.v8.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dojotoolkit.optimizer.v8.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dojotoolkit.prereqs.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dojotoolkit.rt.v8.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dojotoolkit.server.util.feature"
-         version="0.0.0"/>
-
    <plugin
          id="org.dojotoolkit.zazl"
          download-size="0"
@@ -52,39 +24,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.dojotoolkit.zazl.jetty"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.dojotoolkit.zazl.samples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.dojotoolkit.zazl.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.dojotoolkit.zazl.commonjs"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
          id="org.dojotoolkit.zazl.servlet"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.dojotoolkit.zazl.servlet.osgi"
          download-size="0"
          install-size="0"
          version="0.0.0"

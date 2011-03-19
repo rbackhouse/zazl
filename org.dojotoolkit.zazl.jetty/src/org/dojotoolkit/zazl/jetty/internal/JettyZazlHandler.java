@@ -13,13 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dojotoolkit.optimizer.JSOptimizer;
+import org.dojotoolkit.server.util.resource.ResourceLoader;
+import org.dojotoolkit.server.util.rhino.RhinoClassLoader;
 import org.dojotoolkit.zazl.servlet.ZazlHandler;
 import org.mortbay.jetty.HttpConnection;
 import org.mortbay.jetty.Request;
 import org.mortbay.jetty.handler.AbstractHandler;
-import org.dojotoolkit.optimizer.JSOptimizer;
-import org.dojotoolkit.server.util.resource.ResourceLoader;
-import org.dojotoolkit.server.util.rhino.RhinoClassLoader;
 
 public class JettyZazlHandler extends AbstractHandler {
 	protected ZazlHandler zazlHandler = null;

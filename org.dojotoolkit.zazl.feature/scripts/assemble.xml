@@ -9,8 +9,12 @@
 		value="${basedir}/.."/>
 	
 	<property
-		name="dojo.dir"
+		name="dojo.15.dir"
 		value="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.5.0"/>
+	
+	<property
+		name="dojo.16.dir"
+		value="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.6.0"/>
 	
 	<property
 		name="json.dir"
@@ -18,7 +22,11 @@
 	
 	<property
 		name="uglifyjs.dir"
-		value="${workspace.dir}/../targetplatform/uglifyjs/plugins/org.uglifyjs_1.0.0"/>
+		value="${workspace.dir}/../targetplatform/uglifyjs/plugins/org.uglifyjs_0.9.0"/>
+	
+	<property
+		name="requirejs.dir"
+		value="${workspace.dir}/../targetplatform/requirejs/plugins/org.requirejs_0.24.0"/>
 	
 	<property
 		name="httpclient.dir"
@@ -28,7 +36,6 @@
 		name="equinox.dir"
 		value="${workspace.dir}/../targetplatform/equinox-SDK-3.6/plugins"/>
 	
-	<!-- Export the feature -->
 	<target name="assemble">
 		<mkdir dir="${target.dir}/package"/>
 		<mkdir dir="${target.dir}/package/server"/>
@@ -111,16 +118,24 @@
 		</copy>
 		<jar destfile="${target.dir}/package/server/library/v8javabridge.jar"
 			basedir="${workspace.dir}/org.dojotoolkit.rt.v8/bin"/>
-		<jar destfile="${target.dir}/package/server/dojo.jar">
-			<zipfileset dir="${dojo.dir}/dojo" prefix="dojo"/>
-			<zipfileset dir="${dojo.dir}/dijit" prefix="dijit"/>
-			<zipfileset dir="${dojo.dir}/dojox" prefix="dojox"/>
+		<jar destfile="${target.dir}/package/server/dojo15.jar">
+			<zipfileset dir="${dojo.15.dir}/dojo" prefix="dojo"/>
+			<zipfileset dir="${dojo.15.dir}/dijit" prefix="dijit"/>
+			<zipfileset dir="${dojo.15.dir}/dojox" prefix="dojox"/>
+		</jar>
+		<jar destfile="${target.dir}/package/server/dojo16.jar">
+			<zipfileset dir="${dojo.16.dir}/dojo" prefix="dojo"/>
+			<zipfileset dir="${dojo.16.dir}/dijit" prefix="dijit"/>
+			<zipfileset dir="${dojo.16.dir}/dojox" prefix="dojox"/>
 		</jar>
 		<jar destfile="${target.dir}/package/server/library/jsonjs.jar">
 			<zipfileset dir="${json.dir}/json" prefix="json"/>
 		</jar>
 		<jar destfile="${target.dir}/package/server/library/uglifyjs.jar">
 			<zipfileset dir="${uglifyjs.dir}/uglifyjs" prefix="uglifyjs"/>
+		</jar>
+		<jar destfile="${target.dir}/package/server/library/requirejs.jar">
+			<zipfileset dir="${requirejs.dir}/requirejs" prefix="requirejs"/>
 		</jar>
 		<path id="classpath">
 	        <fileset dir="${target.dir}/package/server/library">
@@ -153,6 +168,7 @@
 				<exclude name="**/org.dojotoolkit.dojo_*.jar"/> 
 				<exclude name="**/org.json_*.jar"/> 
 				<exclude name="**/org.uglifyjs_*.jar"/> 
+				<exclude name="**/org.requirejs_*.jar"/> 
 				<exclude name="**/org.dojotoolkit.optimizer.samples_*.jar"/> 
 				<exclude name="**/org.dojotoolkit.zazl.tests_*.jar"/> 
 			</tarfileset>
@@ -161,34 +177,39 @@
 			</tarfileset>
 		</tar>
 		
-		<zip destfile="${target.dir}/package/zazlsrc.zip">
-			<fileset file="${workspace.dir}/org.dojotoolkit.zazl.jetty/LICENSE"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.json/src" prefix="org.dojotoolkit.json/src"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/src" prefix="org.dojotoolkit.rt.v8/src"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.rt.v8/nativesrc" prefix="org.dojotoolkit.rt.v8/nativesrc">
-				<exclude name="**/v8src.zip"/> 
-			</zipfileset>	
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl/src" prefix="org.dojotoolkit.zazl/src"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl/jssrc" prefix="org.dojotoolkit.zazl/jssrc"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.jetty/src" prefix="org.dojotoolkit.zazl.jetty/src"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.tests/src" prefix="org.dojotoolkit.zazl.tests/src"/>
-	    </zip>
+		<tar destfile="${target.dir}/package/zazlnodejs.tar.gz" compression="gzip">
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.optimizer.nodejs/jsoptimizer" prefix="zazlnodejs/node_modules/jsoptimizer"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.optimizer/optimizer" prefix="zazlnodejs/node_modules/jsoptimizer/lib/optimizer"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.optimizer.amd/optimizer" prefix="zazlnodejs/node_modules/jsoptimizer/lib/optimizer"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.server.util.nodejs/zazlutil" prefix="zazlnodejs/node_modules/zazlutil"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.nodejs/zazlserver" prefix="zazlnodejs/node_modules/zazlserver"/>
+			<tarfileset file="${workspace.dir}/org.dojotoolkit.zazl.optimizer/tag/jstag.js" prefix="zazlnodejs/node_modules/zazlserver/lib/org/dojotoolkit/zazl/optimizer/tag"/>
+			<tarfileset file="${workspace.dir}/org.dojotoolkit.zazl/jssrc/dojox/serverdtl/Request.js" prefix="zazlnodejs/node_modules/zazlserver/lib/dojox/serverdtl"/>
+			<tarfileset file="${workspace.dir}/org.dojotoolkit.zazl/jssrc/dojox/serverdtl/util.js" prefix="zazlnodejs/node_modules/zazlserver/lib/dojox/serverdtl"/>
+			<tarfileset dir="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.5.0/dojo" prefix="zazlnodejs/dojo15/dojo"/>
+			<tarfileset dir="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.5.0/dijit" prefix="zazlnodejs/dojo15/dijit"/>
+			<tarfileset dir="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.5.0/dojox" prefix="zazlnodejs/dojo15/dojox"/>
+			<tarfileset dir="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.6.0/dojo" prefix="zazlnodejs/dojo16/dojo"/>
+			<tarfileset dir="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.6.0/dijit" prefix="zazlnodejs/dojo16/dijit"/>
+			<tarfileset dir="${workspace.dir}/../targetplatform/dojo/plugins/org.dojotoolkit.dojo_1.6.0/dojox" prefix="zazlnodejs/dojo16/dojox"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources" prefix="zazlnodejs/samples">
+				<include name="*.html"/> 
+				<include name="*.json"/> 
+			</tarfileset>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/css" prefix="zazlnodejs/samples/css"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/data" prefix="zazlnodejs/samples/data"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/" prefix="zazlnodejs/samples/org/dojotoolkit/zazl/samples">
+				<include name="*.dtl"/> 
+				<include name="*.js"/> 
+			</tarfileset>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/handlers" prefix="zazlnodejs/samples/org/dojotoolkit/zazl/samples/handlers"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/filters" prefix="zazlnodejs/samples/org/dojotoolkit/zazl/samples/filters"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.samples/resources/tags" prefix="zazlnodejs/samples/org/dojotoolkit/zazl/samples/tags"/>
+			<tarfileset file="${workspace.dir}/org.dojotoolkit.zazl.nodejs/zazlserver.js" prefix="zazlnodejs"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources" prefix="zazlnodejs/amdsamples"/>
+			<tarfileset dir="${requirejs.dir}/requirejs" prefix="zazlnodejs/amdsamples/requirejs"/>
+		</tar>
 		
-		<zip destfile="${target.dir}/package/zazl-jack.zip">
-			<zipfileset dir="${dojo.dir}/dojo" prefix="zazl/lib/dojo"/>
-			<zipfileset dir="${dojo.dir}/dijit" prefix="zazl/lib/dijit"/>
-			<zipfileset dir="${dojo.dir}/dojox" prefix="zazl/lib/dojox"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.commonjs/lib" prefix="zazl/lib"/>
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.commonjs" prefix="zazl">
-				<include name="**/package.json"/> 
-			</zipfileset>	
-			<zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl/jssrc" prefix="zazl/lib"/>
-		</zip>
-		
-		<zip destfile="${target.dir}/package/zazlexamples.zip">
-			<zipfileset file="${workspace.dir}//org.dojotoolkit.zazl.commonjs/lib/jackconfig.js" prefix="examples"/>
-			<zipfileset dir="${target.dir}/package/examples" prefix="examples"/>
-	    </zip>
 		<war destfile="${target.dir}/package/zazlsamples.war" webxml="${workspace.dir}/org.dojotoolkit.zazl.samples/WARContent/web.xml">
 			<zipfileset dir="${workspace.dir}/org.dojotoolkit.compressor/src" prefix="WEB-INF/classes">
 				<include name="org_dojotoolkit_compressor.properties"/> 
@@ -198,7 +219,7 @@
 			</zipfileset>
 			<fileset dir="${target.dir}/package/examples"/>
 			<zipfileset dir="${target.dir}/package/server" prefix="WEB-INF/lib">
-				<include name="dojo.jar"/> 
+				<include name="dojo15.jar"/> 
 			</zipfileset>	
 			<zipfileset dir="${target.dir}/package/server/library" prefix="WEB-INF/lib">
 				<include name="apache-mime*.jar"/> 
@@ -212,13 +233,64 @@
 				<include name="org.dojotoolkit.json_1.0.0*.jar"/> 
 				<include name="org.dojotoolkit.zazl_1.0.0*.jar"/> 
 				<include name="org.dojotoolkit.zazl.servlet_1.0.0*.jar"/> 
-				<include name="org.dojotoolkit.optimizer*.jar"/> 
+				<include name="org.dojotoolkit.optimizer_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.rhino_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.servlet_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.v8_1.0.0*.jar"/> 
 				<include name="org.dojotoolkit.zazl.optimizer_1.0.0*.jar"/> 
 				<include name="org.dojotoolkit.compressor*.jar"/> 
 				<include name="org.dojotoolkit.server.util_1.0.0*.jar"/> 
 				<include name="org.dojotoolkit.shrinksafe_1.0.0*.jar"/> 
 				<include name="json*.jar"/> 
 				<include name="uglifyjs*.jar"/> 
+				<include name="v8javabridge.jar"/> 
+				<exclude name="org.dojotoolkit.optimizer.samples*.jar"/> 
+			</zipfileset>	
+		</war>
+		<propertyfile file="${target.dir}/package/org_dojotoolkit_optimizer.properties">
+		  <entry  key="jsOptimizerClassName" value="org.dojotoolkit.optimizer.amd.v8.AMDJSOptimizer"/>
+		</propertyfile>		
+		<war destfile="${target.dir}/package/zazlamdsamples.war" webxml="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/WARContent/web.xml">
+			<zipfileset dir="${workspace.dir}/org.dojotoolkit.compressor/src" prefix="WEB-INF/classes">
+				<include name="org_dojotoolkit_compressor.properties"/> 
+			</zipfileset>
+			<zipfileset dir="${target.dir}/package" prefix="WEB-INF/classes">
+				<include name="org_dojotoolkit_optimizer.properties"/> 
+			</zipfileset>
+	        <fileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources">
+	            <include name="*.*"/>
+	        </fileset>
+	        <zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources/app" prefix="app">
+	            <include name="*.*"/>
+	        </zipfileset>
+			<zipfileset dir="${target.dir}/package/server" prefix="WEB-INF/lib">
+				<include name="dojo16.jar"/> 
+			</zipfileset>	
+			<zipfileset dir="${target.dir}/package/server/library" prefix="WEB-INF/lib">
+				<include name="apache-mime*.jar"/> 
+				<include name="commons-codec*.jar"/> 
+				<include name="httpclient-4.*.jar"/> 
+				<include name="httpcore-4.*.jar"/> 
+				<include name="httpcore-nio-4*.jar"/> 
+				<include name="httpmime-4*.jar"/> 
+				<include name="org.mozilla.javascript*.jar"/> 
+				<include name="org.apache.commons.logging*.jar"/> 
+				<include name="org.dojotoolkit.json_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.zazl_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.zazl.servlet_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.amd*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.rhino_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.servlet_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.optimizer.v8_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.zazl.optimizer_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.compressor*.jar"/> 
+				<include name="org.dojotoolkit.server.util_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.server.util.js_1.0.0*.jar"/> 
+				<include name="org.dojotoolkit.shrinksafe_1.0.0*.jar"/> 
+				<include name="json*.jar"/> 
+				<include name="uglifyjs*.jar"/> 
+				<include name="requirejs*.jar"/> 
 				<include name="v8javabridge.jar"/> 
 				<exclude name="org.dojotoolkit.optimizer.samples*.jar"/> 
 			</zipfileset>	

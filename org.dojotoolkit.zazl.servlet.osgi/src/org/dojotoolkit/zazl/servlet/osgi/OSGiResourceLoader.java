@@ -27,9 +27,8 @@ public class OSGiResourceLoader extends JSCompressorResourceLoader implements Co
 	public OSGiResourceLoader(BundleContext context, 
 			                  Bundle serverDTLBundle,
 			                  String[] bundleIds,
-			                  JSCompressorFactory jsCompressorFactory, 
-			                  String[] ignoreList) {
-		super(jsCompressorFactory, ignoreList);
+			                  JSCompressorFactory jsCompressorFactory) {
+		super(jsCompressorFactory);
 		this.context = context;
 		this.bundleIds = bundleIds;
 		this.serverDTLBundle = serverDTLBundle; 

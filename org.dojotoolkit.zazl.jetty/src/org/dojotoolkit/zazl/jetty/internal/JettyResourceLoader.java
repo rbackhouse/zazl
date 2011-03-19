@@ -25,8 +25,8 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 	protected List<ResourceHandler> resourceHandlerList = null;
 	protected List<ContentProvider> contentProviderList = null;
 	
-	public JettyResourceLoader(File root, ResourceHandler[] resourceHandlers, JSCompressorFactory jsCompressorFactory, String[] ignoreList) {
-		super(jsCompressorFactory, ignoreList);
+	public JettyResourceLoader(File root, ResourceHandler[] resourceHandlers, JSCompressorFactory jsCompressorFactory) {
+		super(jsCompressorFactory);
 		
 		this.root = root;
 		resourceHandlerList = new ArrayList<ResourceHandler>();

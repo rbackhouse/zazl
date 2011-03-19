@@ -2,15 +2,24 @@
     <!-- Properties -->
 	<property
 		name="features"
-		value="org.dojotoolkit.zazl.feature"/>
+		value="org.dojotoolkit.zazl.feature, 
+		       org.dojotoolkit.zazl.jetty.feature, 
+		       org.dojotoolkit.zazl.samples.feature, 
+		       org.dojotoolkit.zazl.servlet.osgi.feature,
+	           org.dojotoolkit.zazl.nodejs.feature,
+		       org.dojotoolkit.compressor.feature,
+		       org.dojotoolkit.compressor.v8.feature,
+		       org.dojotoolkit.optimizer.feature,
+		       org.dojotoolkit.optimizer.v8.feature,
+		       org.dojotoolkit.prereqs.feature,
+		       org.dojotoolkit.rt.v8.feature,
+		       org.dojotoolkit.server.util.feature,
+		       org.dojotoolkit.prereq.dojo16,
+		       org.dojotoolkit.prereq.dojo15"/>
 	
 	<property
 		name="target.dir"
 		value="${basedir}/bin/build.artifacts"/>
-	
-	<property
-		name="destination"
-		value="${target.dir}"/>
 	
 	<!-- Export the feature -->
 	<target name="build">
@@ -18,7 +27,7 @@
 		<echo level="warning" message="Wait for background PDE Export to finish..."/>
 		<pde.exportFeatures
 			features="${features}"
-			destination="${destination}"
+			destination="${target.dir}"
 			exportType="directory" 
 			useJARFormat="false"
 			exportSource="false"/>
