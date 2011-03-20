@@ -22,7 +22,7 @@
 	
 	<property
 		name="uglifyjs.dir"
-		value="${workspace.dir}/../targetplatform/uglifyjs/plugins/org.uglifyjs_0.9.0"/>
+		value="${workspace.dir}/../targetplatform/uglifyjs/plugins/org.uglifyjs_1.0.0"/>
 	
 	<property
 		name="requirejs.dir"
@@ -157,7 +157,9 @@
 		
 		<zip destfile="${target.dir}/package/zazlserver.zip">
 			<fileset file="${workspace.dir}/org.dojotoolkit.zazl.jetty/LICENSE"/>
-			<fileset dir="${target.dir}/package"/>
+			<fileset dir="${target.dir}/package">
+				<exclude name="**/dojo16.jar"/> 
+			</fileset>
 	    </zip>
 		
 		<tar destfile="${target.dir}/package/zazlserver.tar.gz" compression="gzip">
@@ -171,6 +173,7 @@
 				<exclude name="**/org.requirejs_*.jar"/> 
 				<exclude name="**/org.dojotoolkit.optimizer.samples_*.jar"/> 
 				<exclude name="**/org.dojotoolkit.zazl.tests_*.jar"/> 
+				<exclude name="**/dojo16.jar"/> 
 			</tarfileset>
 			<tarfileset dir="${target.dir}/package/server" filemode="755" prefix="server">
 				<include name="*.sh"/> 

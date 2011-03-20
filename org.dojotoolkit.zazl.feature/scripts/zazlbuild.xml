@@ -20,13 +20,142 @@
     
 	<target name="build" depends="clean">
         <buildFeature workspaceDirectory="${workspace.dir}"
-              projectName="org.dojotoolkit.zazl.feature"
+              projectName="org.dojotoolkit.prereqs.feature"
               targetplatformid="zazlTarget"
               destination="${target.dir}"
               clearDestination="true"
         	  packagePluginsAsJar="true"
         	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>
+		
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.prereq.dojo16"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>
+		
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.prereq.dojo15"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>
+		
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.server.util.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>     
+		
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.rt.v8.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>   
+		
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.rt.v8.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
               cleanPluginBuild="true"/>        
+		
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.compressor.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	       
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.compressor.v8.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	       
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.optimizer.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	       
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.optimizer.v8.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	       
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.zazl.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	       
+			   
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.zazl.jetty.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+		        
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.zazl.servlet.osgi.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	       
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.zazl.samples.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+		        
+        <buildFeature workspaceDirectory="${workspace.dir}"
+              projectName="org.dojotoolkit.zazl.nodejs.feature"
+              targetplatformid="zazlTarget"
+              destination="${target.dir}"
+              clearDestination="false"
+        	  packagePluginsAsJar="true"
+        	  packagePluginSourcesAsJar="false"
+              cleanPluginBuild="true"/>        
+	           
+		
 		<ant antfile="${workspace.dir}/org.dojotoolkit.zazl.feature/scripts/assemble.xml" target="assemble" inheritall="false">
 			<property name="target.dir" value="${target.dir}"/>
 			<property name="workspace.dir" value="${workspace.dir}"/>
