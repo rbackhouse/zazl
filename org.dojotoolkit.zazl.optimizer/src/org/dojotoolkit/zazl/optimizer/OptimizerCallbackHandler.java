@@ -40,6 +40,7 @@ public class OptimizerCallbackHandler extends ServletCallbackHandler {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String getModuleURLs(String json) {
 		Map<String, Object> params = (Map<String, Object>)JSONUtils.fromJson(json);
 		List<String> moduleList = (List<String>)params.get("modules");
@@ -53,10 +54,11 @@ public class OptimizerCallbackHandler extends ServletCallbackHandler {
 
 			if (debug) {
 				jsonUrls.add(contextRoot+"/_javascript?debug=true");
-				String[] dependencies = analysisData.getDependencies();
-
-				for (String dependency : dependencies) {
-					jsonUrls.add(contextRoot+dependency);
+				if (jsOptimizer.getConfig().get("type").equals((String)"syncloader")) {
+					String[] dependencies = analysisData.getDependencies();
+					for (String dependency : dependencies) {
+						jsonUrls.add(contextRoot+dependency);
+					}
 				}
 			} else {
 				String checksum = analysisData.getChecksum();

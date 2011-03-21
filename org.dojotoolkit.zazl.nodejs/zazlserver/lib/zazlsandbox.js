@@ -20,8 +20,10 @@ getModuleURLs = function(jsonIn) {
 	var urls = []
 	if (debug) {
 		urls.push(request.contextRoot+"/_javascript?debug=true");
-		for (var i = 0; i < analysisData.dependencyList.length; i++) {
-			urls.push(request.contextRoot+path.normalize(analysisData.dependencyList[i]));
+		if (jsoptimizer.config.type === 'syncloader') {
+			for (var i = 0; i < analysisData.dependencyList.length; i++) {
+				urls.push(request.contextRoot+path.normalize(analysisData.dependencyList[i]));
+			}
 		}
 	} else {
 		var url = request.contextRoot + "/_javascript?modules=";

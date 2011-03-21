@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
-<setAttribute key="additional_plugins"/>
+<setAttribute key="additional_plugins">
+<setEntry value="org.dojotoolkit.zazl.samples:1.0.0.qualifier:default:true"/>
+</setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="automaticAdd" value="false"/>
 <booleanAttribute key="automaticValidate" value="true"/>
@@ -29,7 +31,6 @@
 <setEntry value="org.dojotoolkit.server.util.feature:default"/>
 <setEntry value="org.dojotoolkit.zazl.feature:default"/>
 <setEntry value="org.dojotoolkit.zazl.jetty.feature:default"/>
-<setEntry value="org.dojotoolkit.zazl.samples.feature:default"/>
 </setAttribute>
 <booleanAttribute key="show_selected_only" value="true"/>
 <stringAttribute key="target_bundles" value="javax.servlet@default:default,org.apache.commons.logging*1.1.1.v201005080502@default:default,org.mozilla.javascript@default:default,org.eclipse.equinox.common@2:true,org.dojotoolkit.dojo*1.5.0@default:default,org.mortbay.jetty.server@default:default,org.eclipse.osgi@-1:true,org.json@default:default,org.eclipse.osgi.services@default:default,org.apache.httpcomponents.httpclient@default:default,org.uglifyjs@default:default,org.mortbay.jetty.util@default:default,org.dojotoolkit.shrinksafe@default:default,org.eclipse.equinox.registry@default:default,org.dojotoolkit.dojo*1.6.0@default:default,org.apache.httpcomponents.httpcore@default:default"/>
