@@ -1,0 +1,43 @@
+{% load org.dojotoolkit.zazl.optimizer.tag.jstag %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		@import "dojo/resources/dojo.css";
+		@import "dijit/themes/tundra/tundra.css";
+	</style>
+	<script type="text/javascript">
+		require = {
+            packages: [
+                {
+                    name: 'dojo',
+                    location: 'dojo',
+                    main:'lib/main-browser',
+                    lib: '.'
+                },
+                {
+                    name: 'dijit',
+                    location: 'dijit',
+                    main:'lib/main',
+                    lib: '.'
+                }
+            ],
+            paths: {
+                require: 'requirejs/require'
+            },
+			ready: function () {
+                require(['app/TabContainerApp'], function () {});
+			},
+			locale : "{{request.locale}}"
+		};
+	</script>
+    {% jslinks app/TabContainerApp %}        
+
+</head>
+<body class="tundra">
+<div style="width: 350px; height: 290px">
+	<div id="tabContainerNode"></div>
+</div>	
+</body>
+</html>

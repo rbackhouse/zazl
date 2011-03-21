@@ -1,8 +1,7 @@
 define([
 	'dojo',
-	'dijit',
 	'dijit/Calendar'
-], function (dojo, dijit) {
-    var calendar = new dijit.Calendar({}, dojo.byId("calendarNode"));
+], function (dojo, Calendar) {
+    var calendar = new Calendar({}, dojo.byId("calendarNode"));
     return calendar;
 });

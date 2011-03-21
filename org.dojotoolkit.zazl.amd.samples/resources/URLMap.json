@@ -3,5 +3,10 @@
 		"urlPattern": "^/calendar",
 	 	"callback": "app.CalendarContext",
 		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory"
+	},
+	{
+		"urlPattern": "^/tabcontainer",
+	 	"callback": "app.TabContainerAppContext",
+		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory"
 	}
 ]
