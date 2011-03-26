@@ -27,6 +27,9 @@ public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
 
 	protected URL _getResource(String path) throws IOException {
 		URL url = internalGetResource(path, "/jssrc");
+		if (url != null) {
+			timestampLookup.put(path, url);
+		}
 		return url;
 	}
 	
@@ -60,11 +63,6 @@ public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
 		}
 		URL url = servletContext.getResource(path);
 		if (url != null) {
-			String realPath = servletContext.getRealPath(path);
-			if (realPath != null) {
-				File file = new File(realPath);
-				timestampLookup.put(originalPath, file);
-			}
 			return url;
 		}
 			

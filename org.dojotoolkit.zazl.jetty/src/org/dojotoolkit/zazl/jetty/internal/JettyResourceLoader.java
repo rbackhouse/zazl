@@ -74,7 +74,6 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 		URL url = null;
 		File f = new File(root, path);
 		if (f.exists()) {
-			timestampLookup.put(originalPath, f);
 			url = f.toURI().toURL();
 		}
 		else {
@@ -92,6 +91,9 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 					}
 				}
 			}
+		}
+		if (url != null) {
+			timestampLookup.put(originalPath, url);
 		}
 		return url;
 	}
