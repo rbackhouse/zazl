@@ -5,6 +5,11 @@
 		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory"
 	},
 	{
+		"urlPattern": "^/declarative",
+	 	"callback": "app.DeclarativeContext",
+		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory"
+	},
+	{
 		"urlPattern": "^/tabcontainer",
 	 	"callback": "app.TabContainerAppContext",
 		"callbackHandlerId": "org.dojotoolkit.zazl.optimizer.OptimizerCallbackHandlerFactory"

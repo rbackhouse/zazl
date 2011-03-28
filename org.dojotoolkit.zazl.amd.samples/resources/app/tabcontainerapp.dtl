@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@import "dojo/resources/dojo.css";
-		@import "dijit/themes/tundra/tundra.css";
+		@import "dijit/themes/claro/claro.css";
 	</style>
 	<script type="text/javascript">
 		require = {
@@ -27,7 +27,7 @@
                 require: 'requirejs/require'
             },
 			ready: function () {
-                require(['app/TabContainerApp'], function () {});
+                require(['app/TabContainerApp']);
 			},
 			locale : "{{request.locale}}"
 		};
@@ -35,7 +35,7 @@
     {% jslinks app/TabContainerApp %}        
 
 </head>
-<body class="tundra">
+<body class="claro">
 <div style="width: 350px; height: 290px">
 	<div id="tabContainerNode"></div>
 </div>	
