@@ -59,7 +59,7 @@
             <div dojoType="dijit.Calendar"></div>
         </div>
         <div dojoType="dijit.layout.ContentPane" title="Tree tab">
-			<div dojoType="dojo.data.ItemFileReadStore" jsId="continentStore" url="/app/countries.json">
+			<div dojoType="dojo.data.ItemFileReadStore" jsId="continentStore" url="{{contextRoot}}/app/countries.json">
 			</div>
 			<div dojoType="dijit.tree.ForestStoreModel" jsId="continentModel" store="continentStore"
 				query="{type:'continent'}" rootId="continentRoot" rootLabel="Continents"

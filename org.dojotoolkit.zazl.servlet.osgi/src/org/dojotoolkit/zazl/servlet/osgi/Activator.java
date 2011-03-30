@@ -5,6 +5,8 @@
 */
 package org.dojotoolkit.zazl.servlet.osgi;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 
 import org.dojotoolkit.compressor.JSCompressorFactory;
+import org.dojotoolkit.json.JSONParser;
 import org.dojotoolkit.optimizer.JSOptimizerFactory;
 import org.dojotoolkit.optimizer.servlet.JSHandler;
 import org.dojotoolkit.optimizer.servlet.JSServlet;
@@ -108,6 +111,7 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
         }
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		synchronized (lock) {
 			if (!initialized) {
@@ -134,7 +138,16 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
 		            OSGiZazlServlet zazlServlet = new OSGiZazlServlet(resourceHandler, rhinoClassLoader);
 					callbackHandlerRegistryReader.start(extensionRegistry, zazlServlet);
 
-		            JSServlet jsServlet = new JSServlet(resourceHandler, jsOptimizerFactory, rhinoClassLoader, javaChecksum, System.getProperty("jsHandlerType"));
+					String stringWarmupValues = System.getProperty("optimizerWarmup");
+					List<List<String>> warmupValues = null;
+					if (stringWarmupValues != null) {
+						try {
+							warmupValues = (List<List<String>>)JSONParser.parse(new StringReader(stringWarmupValues));
+						} catch (IOException e) {
+							logger.logp(Level.SEVERE, getClass().getName(), "init", "IOException while parsing warmup values", e);
+						}
+					}
+		            JSServlet jsServlet = new JSServlet(resourceHandler, jsOptimizerFactory, rhinoClassLoader, javaChecksum, System.getProperty("jsHandlerType"), warmupValues);
 		            try {
 		    			logger.logp(Level.CONFIG, getClass().getName(), "initialize", "Registering zazlServlet");
 						httpService.registerServlet("/", zazlServlet, null, ZazlHttpContext.getSingleton(httpService.createDefaultHttpContext()));

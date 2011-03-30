@@ -266,6 +266,15 @@
 	        <zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources/app" prefix="app">
 	            <include name="*.*"/>
 	        </zipfileset>
+	        <zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources/app/nls" prefix="app/nls">
+	            <include name="*.*"/>
+	        </zipfileset>
+	        <zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources/app/nls/fr" prefix="app/nls/fr">
+	            <include name="*.*"/>
+	        </zipfileset>
+	        <zipfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources/css" prefix="css">
+	            <include name="*.*"/>
+	        </zipfileset>
 			<zipfileset dir="${target.dir}/package/server" prefix="WEB-INF/lib">
 				<include name="dojo16.jar"/> 
 			</zipfileset>	

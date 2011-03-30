@@ -12,6 +12,10 @@
 	    <param-name>jsHandlerType</param-name>
 	    <param-value>amd</param-value>
 	</context-param>
+	<context-param>
+	    <param-name>optimizerWarmup</param-name>
+	    <param-value>[['app/Calendar'],['app/TabContainerApp'],['app/Declarative']]</param-value>
+	</context-param>
     <servlet>
         <description/>
         <display-name>ZazlServlet</display-name>
