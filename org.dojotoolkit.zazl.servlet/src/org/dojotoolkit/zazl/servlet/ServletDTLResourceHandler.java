@@ -5,7 +5,6 @@
 */
 package org.dojotoolkit.zazl.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -28,7 +27,7 @@ public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
 	protected URL _getResource(String path) throws IOException {
 		URL url = internalGetResource(path, "/jssrc");
 		if (url != null) {
-			timestampLookup.put(path, url);
+			trackURL(path, url);
 		}
 		return url;
 	}

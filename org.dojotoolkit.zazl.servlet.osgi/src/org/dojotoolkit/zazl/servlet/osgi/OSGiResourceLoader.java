@@ -76,7 +76,7 @@ public class OSGiResourceLoader extends JSCompressorResourceLoader implements Co
 			}
 		}
 		if (url != null) {
-			timestampLookup.put(path, url);
+			trackURL(path, url);
 		}
 		return url;
 	}

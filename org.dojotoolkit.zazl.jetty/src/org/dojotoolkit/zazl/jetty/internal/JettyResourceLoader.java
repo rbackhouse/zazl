@@ -93,7 +93,7 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 			}
 		}
 		if (url != null) {
-			timestampLookup.put(originalPath, url);
+			trackURL(originalPath, url);
 		}
 		return url;
 	}
