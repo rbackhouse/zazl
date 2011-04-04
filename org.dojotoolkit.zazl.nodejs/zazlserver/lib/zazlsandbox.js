@@ -87,19 +87,19 @@ var contextType = dojo.getObject(mapping.callback);
 if (contextType === null) {
     response.writeHead(500, {'Content-Type': 'text/plain'}); 
     response.end("Failed to locate Context type ["+mapping.callback+"]");
-    return;
-}
-try {
-	readText = resourceloader.readText;
-	if (async) {
-		new contextType(mapping.parameters, request, function(context) {
-			writeResponse(context);
-		});
-	} else {
-		writeResponse(new contextType(mapping.parameters, request));
+} else {
+	try {
+		readText = resourceloader.readText;
+		if (async) {
+			new contextType(mapping.parameters, request, function(context) {
+				writeResponse(context);
+			});
+		} else {
+			writeResponse(new contextType(mapping.parameters, request));
+		}
+	} catch (exc) {
+	    response.writeHead(500, {'Content-Type': 'text/plain'}); 
+	    response.end("Failed to instantiate instance of Context type ["+mapping.callback+"]["+exc.message+"]");
 	}
-} catch (exc) {
-    response.writeHead(500, {'Content-Type': 'text/plain'}); 
-    response.end("Failed to instantiate instance of Context type ["+mapping.callback+"]["+exc.message+"]");
 }
 
