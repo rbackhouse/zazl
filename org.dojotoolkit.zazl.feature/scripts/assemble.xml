@@ -211,6 +211,7 @@
 			<tarfileset file="${workspace.dir}/org.dojotoolkit.zazl.nodejs/zazlserver.js" prefix="zazlnodejs"/>
 			<tarfileset dir="${workspace.dir}/org.dojotoolkit.zazl.amd.samples/resources" prefix="zazlnodejs/amdsamples"/>
 			<tarfileset dir="${requirejs.dir}/requirejs" prefix="zazlnodejs/amdsamples/requirejs"/>
+			<tarfileset dir="${workspace.dir}/org.dojotoolkit.optimizer.amd/loader" prefix="zazlnodejs/amdsamples/loader"/>
 		</tar>
 		
 		<war destfile="${target.dir}/package/zazlsamples.war" webxml="${workspace.dir}/org.dojotoolkit.zazl.samples/WARContent/web.xml">
