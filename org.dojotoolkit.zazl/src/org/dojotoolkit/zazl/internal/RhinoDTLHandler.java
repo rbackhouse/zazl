@@ -39,7 +39,6 @@ public class RhinoDTLHandler {
 	private ResourceLoader dtlResourceHandler = null;
 	private RhinoClassLoader rhinoClassLoader = null;
 	private boolean debug = false;
-	private boolean useCache = true;
 	private Object external = null;
 	private String[] callbacks = null;
 	private ContextFactory debugContextFactory = null;
@@ -50,7 +49,6 @@ public class RhinoDTLHandler {
 			               Object external,
 			               String[] callbacks,
 			               RhinoClassLoader rhinoClassLoader,
-			               boolean useCache,
 			               ContextFactory debugContextFactory) {
 		this.dtlResponseHandler = dtlResponseHandler;
 		this.dtlResourceHandler = dtlResourceHandler;
@@ -58,12 +56,6 @@ public class RhinoDTLHandler {
 		this.external = external;
 		this.callbacks = callbacks;
 		this.rhinoClassLoader = rhinoClassLoader;
-		this.useCache = useCache;
-		
-		if (debug) {
-			this.useCache = false;
-		}
-		
 		this.debugContextFactory = debugContextFactory;
 	}
 	
@@ -149,7 +141,7 @@ public class RhinoDTLHandler {
 	}
 	
 	private void initScope(ScriptableObject scope) {
-		RhinoJSMethods.initScope(scope, dtlResourceHandler, rhinoClassLoader, useCache, debug);
+		RhinoJSMethods.initScope(scope, dtlResourceHandler, rhinoClassLoader, debug);
     	Method[] methods = getClass().getMethods();
     	for (int i = 0; i < methods.length; i++) {
     		if (methods[i].getName().equals(XHR_REQUEST)) {

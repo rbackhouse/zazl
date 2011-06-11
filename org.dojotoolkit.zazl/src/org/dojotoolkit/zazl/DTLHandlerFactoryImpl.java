@@ -43,7 +43,7 @@ public class DTLHandlerFactoryImpl implements DTLHandlerFactory {
 		}
 	}
 	
-	public DTLHandler createDTLHandler(boolean useCache) {
-		return new DTLHandlerImpl(dtlResourceHandler, rhinoClassLoader, useV8, debug, useCache, debugContextFactory);
+	public DTLHandler createDTLHandler() {
+		return new DTLHandlerImpl(dtlResourceHandler, rhinoClassLoader, useV8, debug, debugContextFactory);
 	}
 }

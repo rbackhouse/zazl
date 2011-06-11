@@ -92,9 +92,6 @@ public class JettyResourceLoader extends JSCompressorResourceLoader {
 				}
 			}
 		}
-		if (url != null) {
-			trackURL(originalPath, url);
-		}
 		return url;
 	}
 }

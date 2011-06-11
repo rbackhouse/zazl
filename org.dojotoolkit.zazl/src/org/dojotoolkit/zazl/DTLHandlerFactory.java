@@ -6,5 +6,5 @@
 package org.dojotoolkit.zazl;
 
 public interface DTLHandlerFactory {
-	public DTLHandler createDTLHandler(boolean useCache);
+	public DTLHandler createDTLHandler();
 }

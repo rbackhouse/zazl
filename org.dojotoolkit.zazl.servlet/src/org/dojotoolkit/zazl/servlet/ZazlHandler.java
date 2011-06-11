@@ -105,7 +105,7 @@ public class ZazlHandler {
     	boolean handled = false;
     	if (matchFound) {
 	    	Map<String, Object> env = createEnvObject(target, request);
-	   		DTLHandler dtlHandler = dtlHandlerFactory.createDTLHandler(!isDebugEnabled(request));
+	   		DTLHandler dtlHandler = dtlHandlerFactory.createDTLHandler();
 	   		Map<String, Object> urlMapping = urlMapLookup.get(matcher.pattern().pattern());
 	   		String callbackHandlerId = (String)urlMapping.get("callbackHandlerId");
 	   		if (callbackHandlerId == null) {

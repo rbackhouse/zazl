@@ -57,10 +57,6 @@ public class Activator implements BundleActivator, ResourceLoader, BundleListene
 	}
 
 	public String readResource(String path) throws IOException {
-		return readResource(path, true);
-	}
-	
-	public String readResource(String path, boolean useCache) throws IOException {
 		URL url = getResource(path);
 		if (url != null) {
 			String resource = null;
@@ -126,7 +122,7 @@ public class Activator implements BundleActivator, ResourceLoader, BundleListene
 	private void runTest() {
 		if (dojoBundle != null && serverDTLBundle != null) {
 			DTLHandlerFactory dtlHandlerFactory = new DTLHandlerFactoryImpl(this, false, false, new RhinoClassLoader(this));		
-	    	DTLHandler dtlHandler = dtlHandlerFactory.createDTLHandler(true);
+	    	DTLHandler dtlHandler = dtlHandlerFactory.createDTLHandler();
 	    	
 	    	try {
 	    		DefaultDTLContext dtlContext = new DefaultDTLContext("testDTL", this, new String[] {"testCallback"});
@@ -147,7 +143,7 @@ public class Activator implements BundleActivator, ResourceLoader, BundleListene
 				e.printStackTrace();
 			}
 			dtlHandlerFactory = new DTLHandlerFactoryImpl(this, true, false);		
-	    	dtlHandler = dtlHandlerFactory.createDTLHandler(true);
+	    	dtlHandler = dtlHandlerFactory.createDTLHandler();
 	    	try {
 	    		DefaultDTLContext dtlContext = new DefaultDTLContext("testDTL", this, new String[] {"testCallback"});
 	    		dtlHandler.handle(dtlContext);

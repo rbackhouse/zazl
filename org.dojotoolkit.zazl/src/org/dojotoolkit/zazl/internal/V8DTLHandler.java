@@ -32,9 +32,7 @@ public class V8DTLHandler extends V8JavaBridge {
 	public V8DTLHandler(ResourceLoader dtlResourceHandler,  
 			            DTLResponseHandler dtlResponseHandler,
 			            Object external,
-			            String[] callbacks,
-			            boolean useCache) {
-		super(useCache);
+			            String[] callbacks) {
 		this.dtlResourceHandler = dtlResourceHandler;
 		this.dtlResponseHandler = dtlResponseHandler;
 		this.external = external;
@@ -113,7 +111,7 @@ public class V8DTLHandler extends V8JavaBridge {
 	}
 	
 	@Override
-	public String readResource(String path, boolean useCache) throws IOException {
+	public String readResource(String path) throws IOException {
 		try {
 			logger.logp(Level.FINER, getClass().getName(), "getResource", "Path ["+path+"]");
 			URI uri = new URI(path);
@@ -122,7 +120,7 @@ public class V8DTLHandler extends V8JavaBridge {
 				path = '/'+path;
 			}
 			logger.logp(Level.FINER, getClass().getName(), "getResource", "Normalized path ["+path+"]");
-			return dtlResourceHandler.readResource(path, useCache);
+			return dtlResourceHandler.readResource(path);
 		} catch (URISyntaxException e) {
 			throw new IOException(e.getMessage());
 		}
