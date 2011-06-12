@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.dojotoolkit.compressor.JSCompressorFactory;
-import org.dojotoolkit.compressor.JSCompressorFactoryImpl;
 import org.dojotoolkit.server.util.resource.ResourceLoader;
 import org.dojotoolkit.server.util.rhino.RhinoClassLoader;
 import org.dojotoolkit.zazl.contentprovider.ContentProvider;
@@ -56,14 +54,7 @@ public class ZazlServlet extends HttpServlet {
 				if (contentProvidersJsonUrl != null) {
 					contentProviders = Util.loadContentProviders(contentProvidersJsonUrl);
 				}
-				String compressJS = getServletContext().getInitParameter("compressJS");
-
-				JSCompressorFactory jsCompressorFactory = null;
-				if (compressJS != null && compressJS.equalsIgnoreCase("true")) {
-					jsCompressorFactory = new JSCompressorFactoryImpl();
-				}
-
-				resourceLoader = new ServletDTLResourceHandler(getServletContext(), contentProviders, jsCompressorFactory);
+				resourceLoader = new ServletDTLResourceHandler(getServletContext(), contentProviders);
 				getServletContext().setAttribute("org.dojotoolkit.ResourceLoader", resourceLoader);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();

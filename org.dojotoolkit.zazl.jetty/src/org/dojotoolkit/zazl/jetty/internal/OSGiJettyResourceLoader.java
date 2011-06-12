@@ -7,7 +7,6 @@ package org.dojotoolkit.zazl.jetty.internal;
 
 import java.io.File;
 
-import org.dojotoolkit.compressor.JSCompressorFactory;
 import org.dojotoolkit.zazl.contentprovider.ContentProvider;
 import org.dojotoolkit.zazl.servlet.osgi.registry.ContentProviderRegistryListener;
 import org.mortbay.jetty.handler.ResourceHandler;
@@ -17,8 +16,8 @@ import org.osgi.framework.BundleContext;
 public class OSGiJettyResourceLoader extends JettyResourceLoader implements ContentProviderRegistryListener {
 	private BundleContext context = null;
 	
-	public OSGiJettyResourceLoader(File root, ResourceHandler[] resourceHandlers, BundleContext context, JSCompressorFactory jsCompressorFactory) {
-		super(root, resourceHandlers, jsCompressorFactory);
+	public OSGiJettyResourceLoader(File root, ResourceHandler[] resourceHandlers, BundleContext context) {
+		super(root, resourceHandlers);
 		this.context = context;
 	}
 

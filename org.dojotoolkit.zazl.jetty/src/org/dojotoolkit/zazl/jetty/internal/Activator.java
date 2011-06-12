@@ -144,7 +144,7 @@ public class Activator implements BundleActivator, BundleListener, ServiceTracke
 					String compressorType = System.getProperty("compressorType");
 					JSCompressorFactory jsCompressorFactory = getJSCompressorFactory(useV8, compressorType);
 					
-					OSGiJettyResourceLoader resourceLoader = new OSGiJettyResourceLoader(root, bundleHandlers, context, jsCompressorFactory);
+					OSGiJettyResourceLoader resourceLoader = new OSGiJettyResourceLoader(root, bundleHandlers, context);
 					OSGiJettyZazlHandler zazlHandler = new OSGiJettyZazlHandler();  
 
 					dtlServer = new ZazlServer(root, bundleHandlers);

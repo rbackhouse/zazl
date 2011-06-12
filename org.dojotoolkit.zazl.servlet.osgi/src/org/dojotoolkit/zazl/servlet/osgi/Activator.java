@@ -131,7 +131,7 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
 					}
 					String[] bundleIds = new String[bundleIdList.size()];
 					bundleIds = bundleIdList.toArray(bundleIds);
-					resourceHandler = new OSGiResourceLoader(context, serverDTLBundle, bundleIds, jsCompressorFactory);
+					resourceHandler = new OSGiResourceLoader(context, serverDTLBundle, bundleIds);
 					contentProviderRegistryReader.start(extensionRegistry, resourceHandler);
 					RhinoClassLoader rhinoClassLoader = new RhinoClassLoader(resourceHandler);
 
@@ -147,7 +147,7 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer, Bun
 							logger.logp(Level.SEVERE, getClass().getName(), "init", "IOException while parsing warmup values", e);
 						}
 					}
-		            JSServlet jsServlet = new JSServlet(resourceHandler, jsOptimizerFactory, rhinoClassLoader, javaChecksum, System.getProperty("jsHandlerType"), warmupValues);
+		            JSServlet jsServlet = new JSServlet(resourceHandler, jsOptimizerFactory, rhinoClassLoader, javaChecksum, System.getProperty("jsHandlerType"), warmupValues, jsCompressorFactory);
 		            try {
 		    			logger.logp(Level.CONFIG, getClass().getName(), "initialize", "Registering zazlServlet");
 						httpService.registerServlet("/", zazlServlet, null, ZazlHttpContext.getSingleton(httpService.createDefaultHttpContext()));

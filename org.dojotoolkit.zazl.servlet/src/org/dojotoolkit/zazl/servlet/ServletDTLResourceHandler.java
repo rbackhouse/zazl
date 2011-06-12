@@ -10,16 +10,14 @@ import java.net.URL;
 
 import javax.servlet.ServletContext;
 
-import org.dojotoolkit.compressor.JSCompressorFactory;
-import org.dojotoolkit.compressor.JSCompressorResourceLoader;
+import org.dojotoolkit.server.util.resource.CachingResourceLoader;
 import org.dojotoolkit.zazl.contentprovider.ContentProvider;
 
-public class ServletDTLResourceHandler extends JSCompressorResourceLoader {
+public class ServletDTLResourceHandler extends CachingResourceLoader {
 	private ServletContext servletContext = null;
 	private ContentProvider[] contentProviders = null;
 
-	public ServletDTLResourceHandler(ServletContext servletContext, ContentProvider[] contentProviders, JSCompressorFactory jsCompressorFactory) {
-		super(jsCompressorFactory);
+	public ServletDTLResourceHandler(ServletContext servletContext, ContentProvider[] contentProviders) {
 		this.servletContext = servletContext;
 		this.contentProviders = contentProviders;
 	}

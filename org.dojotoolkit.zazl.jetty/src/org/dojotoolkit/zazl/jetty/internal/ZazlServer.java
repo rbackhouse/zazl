@@ -73,7 +73,13 @@ public class ZazlServer {
 			} else {
 				jsOptimizerFactory = new RhinoJSOptimizerFactory();
 			}
-			JSContentHandler jsContentHandler = new JSContentHandler(resourceLoader, jsOptimizerFactory, rhinoClassLoader, javaChecksum); 
+			String compressJS = System.getProperty("compressJS");
+
+			JSCompressorFactory jsCompressorFactory = null;
+			if (compressJS != null && compressJS.equalsIgnoreCase("true")) {
+				jsCompressorFactory = new JSCompressorFactoryImpl();
+			}
+			JSContentHandler jsContentHandler = new JSContentHandler(resourceLoader, jsOptimizerFactory, rhinoClassLoader, javaChecksum, jsCompressorFactory); 
 			zazlHandler.initialize(root, resourceLoader, rhinoClassLoader, jsContentHandler.getJSOptimizer()); 
 			ResourceHandler rootHandler = new ResourceHandler();
 			rootHandler.setBaseResource(new FileResource(new URL("file:"+root.getCanonicalPath())));
@@ -119,13 +125,7 @@ public class ZazlServer {
 			File root = new File(args[0]);
 			try {
 				ResourceHandler[] resourceHandlers = loadResourceHandlers();
-				String compressJS = System.getProperty("compressJS");
-
-				JSCompressorFactory jsCompressorFactory = null;
-				if (compressJS != null && compressJS.equalsIgnoreCase("true")) {
-					jsCompressorFactory = new JSCompressorFactoryImpl();
-				}
-				ResourceLoader resourceLoader = new JettyResourceLoader(root, resourceHandlers, jsCompressorFactory);
+				ResourceLoader resourceLoader = new JettyResourceLoader(root, resourceHandlers);
 				ZazlServer dtlServer = new ZazlServer(root, resourceHandlers);
 				JettyZazlHandler zazlHandler = new JettyZazlHandler();
 				dtlServer.start(zazlHandler, resourceLoader);

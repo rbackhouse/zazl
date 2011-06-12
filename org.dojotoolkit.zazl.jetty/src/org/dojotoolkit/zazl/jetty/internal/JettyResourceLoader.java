@@ -12,22 +12,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dojotoolkit.compressor.JSCompressorFactory;
-import org.dojotoolkit.compressor.JSCompressorResourceLoader;
+import org.dojotoolkit.server.util.resource.CachingResourceLoader;
 import org.dojotoolkit.zazl.contentprovider.ContentProvider;
 import org.dojotoolkit.zazl.contentprovider.Util;
 import org.mortbay.jetty.Handler;
 import org.mortbay.jetty.handler.ResourceHandler;
 import org.mortbay.resource.Resource;
 
-public class JettyResourceLoader extends JSCompressorResourceLoader {
+public class JettyResourceLoader extends CachingResourceLoader {
 	private File root = null;
 	protected List<ResourceHandler> resourceHandlerList = null;
 	protected List<ContentProvider> contentProviderList = null;
 	
-	public JettyResourceLoader(File root, ResourceHandler[] resourceHandlers, JSCompressorFactory jsCompressorFactory) {
-		super(jsCompressorFactory);
-		
+	public JettyResourceLoader(File root, ResourceHandler[] resourceHandlers) {
 		this.root = root;
 		resourceHandlerList = new ArrayList<ResourceHandler>();
 		for (ResourceHandler resourceHandler : resourceHandlers) {

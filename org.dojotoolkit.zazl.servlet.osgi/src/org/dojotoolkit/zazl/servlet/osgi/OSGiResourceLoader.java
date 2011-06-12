@@ -10,14 +10,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dojotoolkit.compressor.JSCompressorFactory;
-import org.dojotoolkit.compressor.JSCompressorResourceLoader;
+import org.dojotoolkit.server.util.resource.CachingResourceLoader;
 import org.dojotoolkit.zazl.contentprovider.ContentProvider;
 import org.dojotoolkit.zazl.servlet.osgi.registry.ContentProviderRegistryListener;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
-public class OSGiResourceLoader extends JSCompressorResourceLoader implements ContentProviderRegistryListener {
+public class OSGiResourceLoader extends CachingResourceLoader implements ContentProviderRegistryListener {
 	private Bundle serverDTLBundle = null;
 	private Bundle[] bundles = null;
 	private String[] bundleIds = null;
@@ -26,9 +25,7 @@ public class OSGiResourceLoader extends JSCompressorResourceLoader implements Co
 	
 	public OSGiResourceLoader(BundleContext context, 
 			                  Bundle serverDTLBundle,
-			                  String[] bundleIds,
-			                  JSCompressorFactory jsCompressorFactory) {
-		super(jsCompressorFactory);
+			                  String[] bundleIds) {
 		this.context = context;
 		this.bundleIds = bundleIds;
 		this.serverDTLBundle = serverDTLBundle; 
