@@ -11,7 +11,7 @@
 <stringAttribute key="bootstrap" value=""/>
 <stringAttribute key="checked" value="[NONE]"/>
 <booleanAttribute key="clearConfig" value="true"/>
-<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Zazl OSGi Server (AMD Samples) (Rhino)"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Zazl OSGi Server (AMD Samples) (Rhino) (shrinksafe)"/>
 <booleanAttribute key="default" value="false"/>
 <booleanAttribute key="default_auto_start" value="true"/>
 <intAttribute key="default_start_level" value="4"/>
@@ -20,7 +20,7 @@
 <booleanAttribute key="includeOptional" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -console"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.ignoreApp=true -Dosgi.noShutdown=true  -Djava.util.logging.config.file=${workspace_loc}/org.dojotoolkit.zazl.jetty/logging.properties -Dorg.osgi.service.http.port=8080 -DV8=false -DjavaChecksum=true -DcompressorType=shrinksafe -DsearchBundleIds=org.dojotoolkit.dojo,org.dojotoolkit.compressor.uglifyjs,org.json,org.uglifyjs,org.dojotoolkit.server.util.js,org.requirejs,org.dojotoolkit.optimizer.amd -DjsHandlerType=amd"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.ignoreApp=true -Dosgi.noShutdown=true  -Djava.util.logging.config.file=${workspace_loc}/org.dojotoolkit.zazl.jetty/logging.properties -Dorg.osgi.service.http.port=8080 -DV8=false -DjavaChecksum=true -DcompressorType=shrinksafe -DsearchBundleIds=org.dojotoolkit.dojo,org.dojotoolkit.compressor.uglifyjs,org.json,org.uglifyjs,org.dojotoolkit.server.util.js,org.requirejs,org.dojotoolkit.optimizer.amd -DjsHandlerType=requirejs"/>
 <stringAttribute key="pde.version" value="3.3"/>
 <setAttribute key="selected_features">
 <setEntry value="org.dojotoolkit.compressor.feature:default"/>
